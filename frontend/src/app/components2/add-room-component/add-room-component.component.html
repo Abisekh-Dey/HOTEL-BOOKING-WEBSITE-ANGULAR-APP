@@ -1,0 +1,357 @@
+<div id="about">
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/authentication/adminSignin/adminHome']">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page" style="color: black;">Rooms</li>
+      </ol>
+    </nav>
+      <div class="row g-0" id="about_cont">
+          <div class="card-body"> 
+            <div class="col-md-4" id="hotels_div">
+              <div class="search_cont">
+                <input type="text" placeholder="Enter Hotel Id" id="form3Example4cg" class="form-control" [(ngModel)]="hotel_id" required name="hotel_id"/>
+                <input type="text" placeholder="Enter Room Id" id="form3Example4cg" class="form-control" [(ngModel)]="room_id" required name="room_id"/>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal2" id="search1_btn" (click)="getRoombyId(hotel_id,room_id)">Search Room</button>
+                <input type="text" placeholder="Enter Hotel Id" id="form3Example4cg" class="form-control" required [(ngModel)]="id" name="hotel_search_id"/>
+                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal3" id="search2_btn"  (click)="getHotelbyId(id)">Add by Hotel Id</button>
+              </div>
+               <div class="show_hotels">
+                <div class="all_hotels">
+                  <nav class="nav" style="position: sticky">
+                    <ul class="list-group list-group-horizontal d-flex justify-content-center sub_nav" style=" width:100%">
+                      <li class="list-group-item" style="width:10%; border-top-left-radius: .5rem">Sl No.</li>
+                      <li class="list-group-item" style="width:25%">Hotel Id</li>
+                      <li class="list-group-item" style="width:11%">Location</li>
+                      <li class="list-group-item" style="width:10%">Total<br>Rooms</li>
+                      <li class="list-group-item" style="width:11%">Add<br>Rooms</li>
+                      <li class="list-group-item" style="width:11%">Get<br>Rooms</li>
+                      <li class="list-group-item" style="width:11%">Update<br>Rooms</li>
+                      <li class="list-group-item" style="width:11%; border-top-right-radius:.5rem;border-right: 1px solid rgb(222 226 230);">Delete<br>Rooms</li>
+                    </ul>
+                  </nav>
+                  <div class="sub_div">
+                    <ul class="list-group list-group-horizontal" *ngFor="let hotel of hotels; let i = index">
+                      <li class="list-group-item" style="width:10%">{{ i + 1 }}</li>
+                      <li class="list-group-item" style="width:25%; cursor:text; user-select:text">{{ hotel._id }}</li>
+                      <li class="list-group-item" style="width:11%">{{ hotel.location }}</li>
+                      <li class="list-group-item" style="width:10%">{{ hotel.totalRooms}}</li>
+                      <li class="list-group-item d-flex justify-content-center" style="width:11%; padding:0"><button class="room_btn" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="addClick(hotel._id)">Add Rooms</button></li>
+                      <li class="list-group-item d-flex justify-content-center" style="width:11%; padding:0"><button class="get_btn" data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="getAllRooms(hotel._id)">Get Rooms</button></li>
+                      <li class="list-group-item d-flex justify-content-center" style="width:11%; padding:0"><button class="update_btn" data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="getAllRooms(hotel._id)">Update</button></li>
+                      <li class="list-group-item d-flex justify-content-center" style="width:11%; padding:0"><button class="delete_btn" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="getAllRooms(hotel._id)">Delete</button></li>
+                    </ul>
+                  </div>
+  
+  
+  <!--Modal-1-->
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog"style="border:2px solid wheat; border-radius:.7rem">
+      <div class="modal-content"  style="background-color: rgba(31, 30, 30, 0.9); color:white">
+        <div class="modal-header">
+          @if(isUpdate){
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Update Rooms</h1>
+          }
+          @else{
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Add Rooms</h1>
+          }
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color:white" (click)="reset()"></button>
+        </div>
+        @if(!submitted){
+        <div class="modal-body">
+          @if(errorstatus===422){
+            <div class="alert alert-danger" role="alert">
+              <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+              Please fill up the form correctly!
+            </div>
+          }
+          @if(errorstatus===502){
+            <div class="alert alert-danger" role="alert">
+              <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+              Room creation failed!
+            </div>
+          }
+          <form>
+            <!-- Room Number -->
+            <div data-mdb-input-init class="form-outline mb">
+              <label class="form-label" for="roomNumber">Enter Room Number</label>
+              <input type="text" placeholder="Enter Room Number" id="roomNumber" class="form-control" required [(ngModel)]="room.number" name="number"/>
+            </div>
+          
+            <!-- Room Type -->
+            <div class="form-outline mb">
+              <label class="form-label" for="roomType">Select Room Type</label>
+              <select id="roomType" class="form-select" [(ngModel)]="room.type" name="type" required>
+                <option value="" disabled selected>Select Room Type</option>
+                <option value="normal (1 person)">Normal (1 person)</option>
+                <option value="normal (2 persons)">Normal (2 persons)</option>
+                <option value="normal (3 persons)">Normal (3 persons)</option>
+                <option value="normal (4 persons)">Normal (4 persons)</option>
+                <option value="Family normal (5 persons)">Family Normal (5 persons)</option>
+                <option value="Family norma (6 persons)l">Family Normal (6 persons)</option>
+                <option value="delux (1 person)">Delux (1 person)</option>
+                <option value="delux (2 person)">Delux (2 person)</option>
+                <option value="delux (3 person)">Delux (3 person)</option>
+                <option value="delux (4 person)">Delux (4 person)</option>
+                <option value="Family delux (5 person)">Family Delux (5 person)</option>
+                <option value="Family delux (6 person)">Family Delux (6 person)</option>
+                <option value="suite (2 person)">Suite (2 person)</option>
+                <option value="suite (3 person)">Suite (3 person)</option>
+                <option value="suite (4 person)">Suite (4 person)</option>
+                <option value="Family suite (5 person)">Family Suite (5 person)</option>
+                <option value="Family suite (6 person)">Family Suite (6 person)</option>
+              </select>
+            </div>
+          
+            <!-- Price -->
+            <div data-mdb-input-init class="form-outline mb">
+              <label class="form-label" for="price">Enter Price</label>
+              <input type="number" placeholder="Enter Price" id="price" class="form-control" required [(ngModel)]="room.price" name="price" min="0" step="0.01"/>
+            </div>
+          
+            <!-- Air Conditioning (AC) -->
+            <div class="form-outline mb">
+              <label class="form-label" for="isAc">Is AC Available?</label>
+              <select id="isAc" class="form-select" [(ngModel)]="room.isAc" name="isAc" required>
+                <option value="" disabled selected>Select</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+
+            @if(isUpdate){
+              <!-- Room ID -->
+            <div data-mdb-input-init class="form-outline mb">
+              <label class="form-label" for="hotelId">Room ID</label>
+              <input type="text" placeholder="Enter Room ID" id="roomId" class="form-control" required [(ngModel)]="room.roomId" name="roomId" disabled style="background-color:rgb(177, 177, 177)"/>
+            </div>
+            }
+            @else{
+              <!-- Hotel ID -->
+            <div data-mdb-input-init class="form-outline mb">
+              <label class="form-label" for="hotelId">Hotel ID</label>
+              <input type="text" placeholder="Enter Hotel ID" id="hotelId" class="form-control" required [(ngModel)]="room.hotelId" name="hotelId" disabled style="background-color:rgb(177, 177, 177)"/>
+            </div>
+            }
+          
+            <!-- Room Images -->
+            <div data-mdb-input-init class="form-outline mb">
+              <label class="form-label" for="images">Upload Room Image-1</label>
+              <input type="file" id="images" class="form-control" multiple [(ngModel)]="room.images[0]" name="images"/>
+            </div>
+
+            <!-- Room Images -->
+            <div data-mdb-input-init class="form-outline mb">
+              <label class="form-label" for="images">Upload Room Image-2</label>
+              <input type="file" id="images" class="form-control" multiple [(ngModel)]="room.images[1]" name="images"/>
+            </div>
+
+            <!-- Room Images -->
+            <div data-mdb-input-init class="form-outline mb">
+              <label class="form-label" for="images">Upload Room Image-3</label>
+              <input type="file" id="images" class="form-control" multiple [(ngModel)]="room.images[2]" name="images"/>
+            </div>
+          
+          </form>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="reset()">Close</button>
+          @if(isUpdate){
+            <button type="button" class="btn btn-primary" (click)="updateRoom()">Update Room</button>
+          }
+          @else{
+            <button type="button" class="btn btn-primary" (click)="saveRoom()">Add Room</button>
+          }
+        </div>
+      }
+      @else{
+        <div class="modal-body">
+          <div class="alert alert-success " role="alert">
+            @if(isUpdate){
+              <i class="fa-regular fa-circle-check" id="success_symbol"></i>
+                Room was updated successfully!
+            }
+            @else{
+              <i class="fa-regular fa-circle-check" id="success_symbol"></i>
+                Congratulations! Room was Added successfully!
+            }
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="reset()">Close</button>
+          @if(!isUpdate){
+            <button type="button" class="btn btn-primary" (click)="addAnother()">Add Another Room</button>
+          }
+        </div>
+      }
+      </div>
+    </div>
+  </div>
+  <!--Modal-2-->
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width:90%; border:2px solid wheat; border-radius:.7rem">
+      <div class="modal-content"  style="background-color: rgba(31, 30, 30, 0.9); color:white">
+        <div class="modal-header">
+          @if(roombyid.length>0){
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Room Details of Hotel Id - {{roombyid[0].hotel}}</h1>
+          }
+          @else{
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Room Details of Hotel Id - {{room.hotelId}}</h1>
+          }
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color:white" (click)="reset()"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group list-group-horizontal" style=" width:100%">
+            <li class="list-group-item" style="width:24%; color:white; background:none">Room Id</li>
+            <li class="list-group-item" style="width:7%; color:white; background:none">Room Number</li>
+            <li class="list-group-item" style="width:7%; color:white; background:none">Room Type</li>
+            <li class="list-group-item" style="width:6%; color:white; background:none">Room Price</li>
+            <li class="list-group-item" style="width:4%; color:white; background:none">Ac</li>
+            <li class="list-group-item" style="width:10%; color:white; background:none">Image-1</li>
+            <li class="list-group-item" style="width:10%; color:white; background:none">Image-2</li>
+            <li class="list-group-item" style="width:10%; color:white; background:none">Image-3</li>
+            <li class="list-group-item" style="width:11%; color:white; background:none">Update</li>
+            <li class="list-group-item" style="width:11%; border-top-right-radius:.5rem;border-right: 1px solid rgb(222 226 230); color:white; background:none">Delete</li>
+          </ul>
+          @if(errorstatus==422){
+            <div class="alert alert-danger" role="alert">
+              <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+              Please fill up the form correctly!
+            </div>
+          }
+          @else if(errorstatus==404){
+            <div class="alert alert-danger" role="alert">
+              <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+              Room not found!
+            </div>
+          }
+          @else if(errorstatus==405){
+            <div class="alert alert-danger" role="alert">
+              <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+              Wrong Hotel Id!
+            </div>
+          }
+          @else{
+            @if(roombyid.length>0){
+              <ul class="list-group list-group-horizontal" style=" width:100%" *ngFor="let i of roombyid">
+                <li class="list-group-item" style="width:24%; cursor:text; user-select:text; color:white; background:none">{{ i._id }}</li>
+                <li class="list-group-item" style="width:7%; color:white; background:none">{{ i.number }}</li>
+                <li class="list-group-item" style="width:7%; color:white; background:none">{{ i.type }}</li>
+                <li class="list-group-item" style="width:6%; color:white; background:none">{{ i.price}}</li>
+                <li class="list-group-item" style="width:4%; color:white; background:none">{{ i.isAc}}</li>
+                <li class="list-group-item" style="width:10%; color:white; background:none">{{ i.images[0]}}</li>
+                <li class="list-group-item" style="width:10%; color:white; background:none">{{ i.images[1]}}</li>
+                <li class="list-group-item" style="width:10%; color:white; background:none">{{ i.images[2]}}</li>
+                <li class="list-group-item d-flex justify-content-center" style="width:11%; padding:0; background:none"><button class="update_btn" style="padding:1% 20%" data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="updateClick(i._id,i.number,i.type,i.price,i.isAc)">Update</button></li>
+                <li class="list-group-item d-flex justify-content-center" style="width:11%; padding:0; background:none"><button class="delete_btn" style="padding:1% 20%"  data-bs-dismiss="modal" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal4" (click)="deleteClick(roombyid[0].hotel,i._id)">Delete</button></li>
+              </ul>
+            }
+            @else{
+            <ul class="list-group list-group-horizontal" style=" width:100%" *ngFor="let i of rooms[0]">
+              <li class="list-group-item" style="width:24%; cursor:text; user-select:text; color:white; background:none">{{ i._id }}</li>
+              <li class="list-group-item" style="width:7%; color:white; background:none">{{ i.number }}</li>
+              <li class="list-group-item" style="width:7%; color:white; background:none">{{ i.type }}</li>
+              <li class="list-group-item" style="width:6%; color:white; background:none">{{ i.price}}</li>
+              <li class="list-group-item" style="width:4%; color:white; background:none">{{ i.isAc}}</li>
+              <li class="list-group-item" style="width:10%; color:white; background:none">{{ i.images[0]}}</li>
+              <li class="list-group-item" style="width:10%; color:white; background:none">{{ i.images[1]}}</li>
+              <li class="list-group-item" style="width:10%; color:white; background:none">{{ i.images[2]}}</li>
+              <li class="list-group-item d-flex justify-content-center" style="width:11%; padding:0; background:none"><button class="update_btn" style="padding:1% 20%" data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="updateClick(i._id,i.number,i.type,i.price,i.isAc)">Update</button></li>
+              <li class="list-group-item d-flex justify-content-center" style="width:11%; padding:0; background:none"><button class="delete_btn" style="padding:1% 20%"  data-bs-dismiss="modal" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal4" (click)="deleteClick(room.hotelId,i._id)">Delete</button></li>
+            </ul>
+            }
+          }
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="reset()">Close</button>
+          <!-- <button type="button" class="btn btn-primary" (click)="updateHotel()" data-bs-dismiss="modal">Update Hotel</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Modal-3-->
+  <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width:70%; border:2px solid wheat; border-radius:.7rem">
+      <div class="modal-content"  style="background-color: rgba(31, 30, 30, 0.9); color:white">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Get Hotel</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color:white" (click)="reset()"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group list-group-horizontal d-flex justify-content-center" style=" width:100%">
+            <li class="list-group-item" style="width:30%; color:white; background:none">Hotel Id</li>
+            <li class="list-group-item" style="width:12%; color:white; background:none">Location</li>
+            <li class="list-group-item" style="width:9%; color:white; background:none">Total<br>Rooms</li>
+            <li class="list-group-item" style="width:15%; color:white; background:none">Images</li>
+            <li class="list-group-item" style="width:18%; color:white; background:none">Add<br>Rooms</li>
+            <li class="list-group-item" style="width:18%; border-top-right-radius:.5rem;border-right: 1px solid rgb(222 226 230); color:white; background:none">Get Rooms</li>
+          </ul>
+          @if(errorstatus==422){
+            <div class="alert alert-danger" role="alert">
+              <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+              Please fill up the form correctly!
+            </div>
+          }
+          @else if(errorstatus==404){
+            <div class="alert alert-danger" role="alert">
+              <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+              Hotel not found!
+            </div>
+          }
+          @else{
+            <ul class="list-group list-group-horizontal" *ngFor="let hotel of hotelbyid">
+              <li class="list-group-item" style="width:30%; cursor:text; user-select:text; color:white; background:none">{{ hotel._id }}</li>
+              <li class="list-group-item" style="width:12%; color:white; background:none">{{ hotel.location }}</li>
+              <li class="list-group-item" style="width:9%; color:white; background:none">{{ hotel.totalRooms}}</li>
+              <li class="list-group-item" style="width:15%; color:white; background:none">{{ hotel.images}}</li>
+              <li class="list-group-item d-flex justify-content-center" style="width:18%; padding:0; background:none"><button style="padding:1% 20%" class="room_btn" data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="addClick(hotel._id)">Add Rooms</button></li>
+              <li class="list-group-item d-flex justify-content-center" style="width:18%; padding:0; background:none"><button class="get_btn" style="padding:1% 20%"  data-bs-dismiss="modal" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="getAllRooms(hotel._id)">Get Rooms</button></li>
+            </ul>
+          }
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="reset()">Close</button>
+          <!-- <button type="button" class="btn btn-primary" (click)="deleteHotel()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal4" id="delete_btn">Delete Hotel</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!--Modal-4-->
+  <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog"style="border:2px solid wheat; border-radius:.7rem">
+      <div class="modal-content"  style="background-color: rgba(31, 30, 30, 0.9); color:white">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete This Room</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color:white" (click)=reset()></button>
+        </div>
+        <div class="modal-body">
+          <span style="color:rgb(255, 66, 66)">Are You Sure To Delete This Room <span style="color: yellow;">[Room Id - {{rid}}]</span> from Existing Hotel <span style="color: blue;">[Hotel Id - {{hid}}]</span> ?</span>
+          <!-- <span style="color:green">Hotel of Id no: deleted successfully!</span> -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)=reset()>Close</button>
+          <button type="button" class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal5" id="delete_btn" (click)="deleteRoom()">Delete Room</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Modal-5-->
+  <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog"style="border:2px solid wheat; border-radius:.7rem">
+      <div class="modal-content"  style="background-color: rgba(31, 30, 30, 0.9); color:white">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Deletation Successful</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color:white" (click)=reset()></button>
+        </div>
+        <div class="modal-body">
+          <!-- <span style="color:red">Are You Sure To Delete This Room <span style="color: yellow;">[Room Id - {{room_id}}]</span> Existing Hotel <span style="color: blue;">[Hotel Id - {{hotel_id}}]</span> ?</span> -->
+          <span style="color:rgb(65, 211, 65)">Room of Id no: <span style="color: yellow;">[{{rid}}]</span> deleted successfully!</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)=reset()>Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,129 @@
+.bg-image{
+    background: url("/assets/Loginbg.jpg") ;
+    background-position: center center;
+    background-size:cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    padding:2% 30%;
+    height: 800px;
+}
+.form_div{
+  width: 100%;
+  padding: 2.5% 5%;
+  min-height: 400px;
+  max-height: 550px;
+  background-color:  rgba(211, 211, 211, 0.5);
+  border-radius: 1rem;
+  display: block;
+}
+.mb {
+  margin-bottom: 3%;
+}
+.gradient-custom-3 {
+    /* fallback for old browsers */
+    background: #84fab0;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5))
+    }
+    .gradient-custom-4 {
+    /* fallback for old browsers */
+    background: #84fab0;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
+    }
+    .is-invalid {
+        border-color: #dc3545;
+      }
+      
+      .is-valid {
+        border-color: #28a745;
+      }
+      
+      .btn {
+        background-image: linear-gradient(to right, #30E8BF 0%, #FF8235  51%, #30E8BF  100%);
+        /* padding:.5% 2%; */
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s ease;
+        background-size: 200% auto;         
+        box-shadow: 0 0 .5rem rgb(0, 0, 88), 0 0 .5rem gray;
+        border-radius: .5rem;
+        display: block;
+        color:blue;
+        font-size: 120%;
+        font-weight: bold;
+      }
+    
+      .btn:hover {
+        transform: scale(1.08);
+        /* box-shadow:0 0 .5rem #30E8BF, 0 0 1rem  green,0 0 1.5rem blue; */
+        background-position: right center; /* change the direction of the change here */
+        text-decoration: none;
+      }             
+.close{
+  display: flex;
+  justify-content: end;
+}
+
+.alert-success{
+  color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 120%;
+}
+#success_symbol{
+  color:green;
+  font-size: 200%;
+  margin-right: 3%;
+}
+.alert-danger{
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 120%;
+}
+#danger_symbol{
+  color:red;
+  font-size: 200%;
+  margin-right: 3%;
+}
+.flipped {
+  animation: flip 0.6s forwards;
+}
+
+@keyframes flip {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(180deg);
+  }
+}
+
+.flip_inside {
+  animation: flip 0.6s forwards;
+}
+
+@keyframes flip {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(180deg);
+  }
+}

@@ -1,0 +1,59 @@
+<div id="about">
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/']" style="color: rgb(0, 166, 255);">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page" style="color: wheat;">Wishlist</li>
+      </ol>
+    </nav>
+
+    <div class="card mb-3" id="div_card">
+        <div class="row g-0" id="about_cont"  *ngFor="let i of wishes">
+          <div class="col-md-4" id="about_image_div">
+            <img [src]="'../../../assets/' + i.images" alt="..." id="about_img">
+          </div>
+          <div class="col-md-8" id="about_text_div">
+            <div class="card-body">
+              <h2 class="card-title">{{ i.name}}</h2>
+              <hr>
+              <h3>{{ i.location }}</h3>
+              <!-- <h6>{{ i._id }}</h6> -->
+              <p class="card-text">Book your dream hotel room with just one click. We offer a diverse collection of rooms tailored to meet your every need, from luxury suites to budget-friendly options. Our focus is on quality and comfort, ensuring that your travel experience is nothing short of memorable.</p>
+              <div style="display: flex;justify-content:space-between">
+                <button id="about_btn" [routerLink]="['/allHotels/allRooms']"[queryParams]="{ id: i.hotelId, name: i.name, location: i.location, image: i.images }">Book Now</button>
+                <button id="remove_btn"  type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="delete(i._id)">Remove</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" style="background-color: rgba(0, 0, 0,.8);color:wheat;border:2px solid wheat">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="reset()" style="background-color: red"></button>
+        </div>
+        <div class="modal-body">
+            Wishlist Item Deleted Successfully!
+          <!-- @if(userId){
+            Hotel {{hotel_name}} added to the wishlist successfully !
+          }
+          @else{
+            Please LOGIN !
+          } -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="reset()">Close</button>
+          <!-- @if(userId){
+            <button type="button" class="btn btn-primary">Check Wishlist</button>
+          }
+          @else{
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" [routerLink]="['/']">LOGIN</button>
+          } -->
+        </div>
+      </div>
+    </div>
+  </div>

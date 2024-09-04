@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+    user-select: none;   
+    box-sizing: border-box;
+}
+hr {
+    border: none;
+    margin-top: 5px;
+    height: 2px;
+    background-color: rgb(18, 64, 118);
+}
+body{
+    overflow-x: hidden;
+    background-color: rgb(26, 54, 54);
+    color:rgb(18, 64, 118);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}

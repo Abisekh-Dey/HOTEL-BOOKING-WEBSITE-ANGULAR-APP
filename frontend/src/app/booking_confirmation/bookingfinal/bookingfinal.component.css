@@ -1,0 +1,60 @@
+.d1{
+    margin-left: 5%;
+    margin-top: 2%;
+    width: 90%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: wheat;
+    border: 2px solid darkblue;
+    border-radius: .5rem;
+    padding: 2%;
+}
+.img{
+    background: url("/assets/confirm.jpeg") ;
+  background-position: center center;
+  background-size:cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: .5rem;
+  border-bottom-left-radius: .5rem;
+  text-decoration: none;
+  outline: none;
+  /* padding:2% 30%;
+  height: 800px; */
+}
+#note{
+    width:100%;
+    padding:1.5% 0;
+    display:block;
+    font-weight: bold; /* Bold text */
+    background-color: yellow; /* Background color for emphasis */
+    border: 2px solid red; /* Border around the notice */
+    border-radius: .5rem;
+    animation: change .8s ease infinite;
+}
+@keyframes change{
+    0% {
+        color: red;
+    }
+    50% {
+        color: blue;
+    }
+    100% {
+        color: red;
+    }
+}
+#close{
+    background-color: rgba(255, 0, 0,.9);
+    opacity: 100%;
+}
+#close:hover{
+    opacity:60%;
+}

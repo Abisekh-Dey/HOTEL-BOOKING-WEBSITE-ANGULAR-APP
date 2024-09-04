@@ -1,0 +1,145 @@
+<!-- <p *ngFor="let i of hotels">
+    {{ i.name}}: {{ i.location | currency:'USD'}}
+</p> -->
+<nav class="navbar">
+  <div class="navbar-container">
+      <!-- Optional Logo -->
+      <!-- <a href="#" class="navbar-logo">HotelBooking</a> -->
+
+      <div class="navbar-form">
+          <form action="#" id="form">
+              <div class="input">
+                  <div class="input_div">
+                      <div class="sub_div">
+                          <div class="destination_cont">
+                            <p class="inner-text"><i class="fa-solid fa-location-dot" style="font-size: 140%;color:red"></i> {{destination}} </p>
+                              <!-- <label for="destination" id="destination">
+                                  <select id="destinations" name="destination"></select>
+                              </label> -->
+                          </div>
+                      </div>
+                  </div>
+                  <div class="input_div">
+                    <p class="inner-text"><i class="fa-solid fa-plane-arrival" style="font-size: 140%;color:cyan"></i>{{checkInDate}}</p>
+                      <!-- <div class="sub_div">
+                          <input type="date" class="dateInput" name="datein" id="datein"/><br>
+                          <h3 id="dayin"></h3>
+                      </div> -->
+                  </div>
+                  <div class="input_div">
+                    <p class="inner-text"><i class="fa-solid fa-plane-departure" style="font-size: 140%;color:yellow"></i>{{checkOutDate}}</p>
+                      <!-- <div class="sub_div">
+                          <input type="date" class="dateInput" name="dateout" id="dateout"/><br>
+                          <h3 id="dayout"></h3>
+                      </div> -->
+                  </div>
+                  <div class="input_div">
+                      <div class="sub_div">
+                        <p class="inner-text"><i class="fa-solid fa-hotel" style="font-size: 140%;color:chocolate"></i>{{rooms}}</p>
+                          <!-- <div class="room_cont">
+                              <label for="rooms" id="room">
+                                  <select name="rooms" id="rooms" class="roomInput"></select>
+                              </label>
+                          </div> -->
+                      </div>
+                  </div>
+                  <div class="input_div">
+                      <div class="sub_div">
+                        <p class="inner-text"><i class="fa-solid fa-person" style="font-size: 140%;color:aquamarine"></i>{{guests}}</p>
+                          <!-- <div class="room_cont">
+                              <label for="persons" id="person">
+                                  <select name="persons" id="persons" class="roomInput"></select>
+                              </label>
+                          </div> -->
+                      </div>
+                  </div>
+                  <div class="input_div">
+                      <div class="sub_div">
+                        <p class="inner-text"><i class="fa-solid fa-wallet" style="font-size: 140%;color:rgb(82, 231, 82)"></i>{{pricePerNight}}</p>
+                          <!-- <div class="price_cont">
+                              <label for="price" id="price">
+                                  <select name="prices" id="prices" class="priceInput"></select>
+                              </label>
+                          </div> -->
+                      </div>
+                  </div>
+              </div>
+              @if(isLogedin){
+                <button class="home_btn" type="submit" value="Search" [routerLink]="['/authentication/adminSignin/adminHome']">Change</button>
+              }
+              @else{
+                <button class="home_btn" type="submit" value="Search" [routerLink]="['/']">Change</button>
+              }
+          </form>
+      </div>
+  </div>
+</nav>
+
+<div class="card mb-3" id="div_card">
+  @if(hotels.length===0){
+    <div style="display: flex;justify-content:center;align-items:center;text-align:center;width:100%;color:wheat;font-size:200%">
+      No Hotels Found At {{destination}}
+    </div>
+  }
+  @else{
+    <div class="row g-0" id="about_cont"  *ngFor="let i of hotels">
+      <div class="col-md-4" id="about_image_div">
+        <img [src]="'../../../assets/' + i.images" alt="..." id="about_img">
+      </div>
+      <div class="col-md-8" id="about_text_div">
+        <div class="card-body">
+          <h2 class="card-title">{{ i.name}}</h2>
+          <hr>
+          @if(userId){
+            <div style="display:flex;justify-content:space-between">
+              <h3>{{ i.location }}</h3>
+              <button class="fa-solid fa-heart " type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="wishlist" title="Add This Hotel To Wishlist" (click)="addWishlist(i._id,i.name,i.images,i.location)" style="background-color: inherit; border:0; color:red;font-size:200%"></button>
+            </div>
+          }
+          @else{
+            <div style="display:flex;justify-content:space-between">
+              <h3>{{ i.location }}</h3>
+              <button class="fa-solid fa-heart " type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="wishlist" title="Add This Hotel To Wishlist" style="background-color: inherit; border:0; color:red;font-size:200%"></button>
+            </div>
+          }
+          <h6>Hotel Id: {{ i._id }}</h6>
+          <p class="card-text">Book your dream hotel room with just one click. We offer a diverse collection of rooms tailored to meet your every need, from luxury suites to budget-friendly options. Our focus is on quality and comfort, ensuring that your travel experience is nothing short of memorable.</p>
+          <button id="about_btn" [routerLink]="['/allHotels/allRooms']"[queryParams]="{ id: i._id, name: i.name, location: i.location, image: i.images }">Book Now</button>
+        </div>
+      </div>
+    </div>
+  }
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="background-color: rgba(0, 0, 0,.8);color:wheat;border:2px solid wheat">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: rgba(255, 0, 0)"></button>
+      </div>
+      <div class="modal-body">
+        @if(userId){
+          @if(errorstatus==409){
+            Hotel {{hotel_name}} is already present in your wishlist!  
+          }
+          @else{
+            Hotel {{hotel_name}} added to the wishlist successfully !
+          }
+        }
+        @else{
+          Please LOGIN !
+        }
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        @if(userId){
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" [routerLink]="['/wishlist']"[queryParams]="{ userid: userId }" >Check Wishlist</button>
+        }
+        @else{
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" [routerLink]="['/']">LOGIN</button>
+        }
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,287 @@
+<header class="header">
+    <nav class="navbar">
+        <div id="d3">
+            <h4 style="cursor: default;"><span id=s1>Book</span><span id="s2">My</span><span id=s3>Room</span></h4>
+            <i class="fa-solid fa-bars" id="menu-icon"></i>
+        </div>
+        <div id="d2">
+            <!-- <a href="#Home" class="active">Home</a>
+            <a href="#Hotels">Hotels</a>
+            <a href="#Rooms">Rooms</a>
+            <a href="#Admins">Admins</a>
+            <a href="#Users">Users</a>
+            <a href="#Profile">Profile</a>
+            <a href="#Booking">Bookings</a>
+            <a href="#UpdatePassword">More</a> -->
+
+            <a href="#Home" [ngClass]="{'active': activeSection === 'Home'}">Home</a>
+            <a href="#Hotels" [ngClass]="{'active': activeSection === 'Hotels'}">Hotels</a>
+            <a href="#Rooms" [ngClass]="{'active': activeSection === 'Rooms'}">Rooms</a>
+            <a href="#Admins" [ngClass]="{'active': activeSection === 'Admins'}">Admins</a>
+            <a href="#Users" [ngClass]="{'active': activeSection === 'Users'}">Users</a>
+            <a href="#Profile" [ngClass]="{'active': activeSection === 'Profile'}">Profile</a>
+            <a href="#Booking" [ngClass]="{'active': activeSection === 'Booking'}">Bookings</a>
+            <a href="#UpdatePassword" [ngClass]="{'active': activeSection === 'UpdatePassword'}">More</a>
+        </div>
+        <!-- <div id="d1">
+            <a [routerLink]="['/userSignup']" class="header_btn">Sign Up</a>
+            <a [routerLink]="['/userSignin']" class="header_btn">Sign In</a>
+        </div> -->
+        <div id="d1">
+            <div *ngIf="isLoggedIn; else loginLinks">
+                <!-- <span>{{ userName }}</span>
+                <button (click)="logout()">Logout</button> -->
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ userName }}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" [routerLink]="['/authentication/adminSignin/adminHome/myprofile']">My Profile</a></li>
+                      <li><a class="dropdown-item" [routerLink]="['/authentication/adminSignin/adminHome/admins']">All Admins</a></li>
+                      <li><a class="dropdown-item" [routerLink]="['/authentication/adminSignin/adminHome/bookings']">All Bookings</a></li>
+                      <li><a class="dropdown-item" [routerLink]="['/authentication/adminSignin/adminHome/feedbacks']">All Feedbacks</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><button class="dropdown-item settings" disabled>Settings Menu<i class="fa-solid fa-gear" style="margin-left: 20%"></i></button></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" [routerLink]="['/authentication/adminSignin/adminHome/passwordupdate']">System Password<i class="fa-solid fa-lock" style="margin-left: 5%"></i></a></li>
+                      <li><button class="dropdown-item" type="button" [routerLink]="['/']" (click)="logout()">Home<i class="fa-solid fa-house" style="margin-left: 60%;"></i></button></li>
+                      <li><button class="dropdown-item" type="button" (click)="logout()">Logout<i class="fa-solid fa-arrow-right-from-bracket" id="logout_symbol"></i></button></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <ng-template #loginLinks >
+                <a [routerLink]="['/authentication']" class="header_btn" id="b1">Sign Up</a>
+                <a [routerLink]="['/authentication']" class="header_btn">Sign In</a>
+        </ng-template>
+    </nav>
+</header>
+<section class="home" id="Home">
+    <!-- <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="assets/homebg1.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="assets/homebg2.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="assets/homebg3.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="assets/homebg4.jpg" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+      </div> -->
+      <div class="home_cont">
+        <div class="text">
+            <p>Your Perfect Stay, Just a Click Away</p>
+            <h1>Make Your Next Travel Memorable<br />In Our <span>Hotel</span>.</h1>
+        </div>
+        <form action="#" id="form">
+            <div class="input">
+                <div class="input_div">
+                    <div class="sub_div">
+                        <p class="add_bg">Country, City Or Location</p>
+                        <div class="destination_cont">
+                            <label for="destination" id="destination">
+                            <select id="destinations" name="destination"></select></label>
+                        </div>
+                        <h3>India</h3>
+                    </div>
+                </div>
+                <div class="input_div">
+                    <div class="sub_div">
+                        <p class="add_bg">Check-In</p><input type="date" class="dateInput" name="datein" id="datein"/><br><h3 id="dayin"></h3>
+                    </div>
+                </div>
+                <div class="input_div">
+                    <div class="sub_div">
+                        <p class="add_bg">Check-Out</p><input type="date" class="dateInput" name="dateout" id="dateout"/><br><h3 id="dayout"></h3>
+                    </div>
+                </div>
+                <div class="input_div">
+                    <div class="sub_div">
+                        <p class="add_bg">Rooms & Guests</p>
+                        <div class="room_cont">
+                            <label for="rooms" id="room">Rooms
+                            <select name="rooms" id="rooms" class="roomInput"></select></label>
+                        </div>
+                        <div class="room_cont">
+                            <label for="persons" id="person">Person
+                            <select name="persons" id="persons" class="roomInput"></select></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="input_div">
+                    <div class="sub_div">
+                        <p class="add_bg">Price Per Night</p>
+                        <div class="price_cont">
+                            <label for="price" id="price">Price
+                            <select name="prices" id="prices" class="priceInput"></select></label>
+                        </div>
+                        <h3 id="note">Note: Price Can Vary On Weekends Or Holidays !</h3>
+                    </div>
+                </div>
+            </div>
+            <button class="home_btn" type="submit" value="Search" [ngClass]="{'disabled': !isLoggedIn}">Search</button>
+        </form>
+      </div>
+</section>
+<section class="about" id="Hotels">
+    <div class="card" id="div_card">
+        <div class="row g-0" id="about_cont">
+          <div class="col-md-4" id="about_image_div">
+            <!-- <img src="../../../../public/assets/about1.jpeg" alt="..." id="about_img"> -->
+             <div class="about_img" id="about_img1"></div>
+          </div>
+          <div class="col-md-8" id="about_text_div">
+            <div class="card-body">
+              <h2 class="card-title">Our Hotels</h2>
+              <hr>
+              <h3>All Hotel Related Operations With Just One Click</h3>
+              <p class="card-text">Book your dream hotel room with just one click. We offer a diverse collection of rooms tailored to meet your every need, from luxury suites to budget-friendly options. Our focus is on quality and comfort, ensuring that your travel experience is nothing short of memorable.</p>
+              <!-- <button onclick="location.href='#home'" id="about_btn" [ngClass]="{'disabled': !isLoggedIn}">Book Now</button> -->
+              <button id="about_btn" [routerLink]="['/authentication/adminSignin/adminHome/hotels']" [ngClass]="{'disabled': !isLoggedIn}"><span id="element1"></span></button>
+            </div>
+          </div>
+        </div>
+    </div>
+</section>
+<section class="about" id="Rooms">
+    <div class="card" id="div_card">
+        <div class="row g-0" id="about_cont">
+          <div class="col-md-4" id="about_image_div">
+            <!-- <img src="../../../../public/assets/about1.jpeg" alt="..." id="about_img"> -->
+             <div class="about_img" id="about_img2"></div>
+          </div>
+          <div class="col-md-8" id="about_text_div">
+            <div class="card-body">
+              <h2 class="card-title">Our Rooms</h2>
+              <hr>
+              <h3>All Room Related Operations With Just One Click</h3>
+              <p class="card-text">Book your dream hotel room with just one click. We offer a diverse collection of rooms tailored to meet your every need, from luxury suites to budget-friendly options. Our focus is on quality and comfort, ensuring that your travel experience is nothing short of memorable.</p>
+              <!-- <button onclick="location.href='#home'" id="about_btn" [ngClass]="{'disabled': !isLoggedIn}">Book Now</button> -->
+              <button id="about_btn" [routerLink]="['/authentication/adminSignin/adminHome/rooms']" [ngClass]="{'disabled': !isLoggedIn}"><span id="element2"></span></button>
+            </div>
+          </div>
+        </div>
+    </div>
+</section>
+<section class="admin" id="Admins">
+    <div class="card" id="div_card">
+        <div class="row g-0" id="about_cont">
+          <div class="col-md-4" id="about_image_div">
+            <!-- <img src="../../../../public/assets/about1.jpeg" alt="..." id="about_img"> -->
+             <div class="about_img" id="about_img3"></div>
+          </div>
+          <div class="col-md-8" id="about_text_div">
+            <div class="card-body">
+              <h2 class="card-title">The Admins</h2>
+              <hr>
+              <h3>All Admin Related Operations With Just One Click</h3>
+              <p class="card-text">Book your dream hotel room with just one click. We offer a diverse collection of rooms tailored to meet your every need, from luxury suites to budget-friendly options. Our focus is on quality and comfort, ensuring that your travel experience is nothing short of memorable.</p>
+              <!-- <button onclick="location.href='#home'" id="about_btn" [ngClass]="{'disabled': !isLoggedIn}">Book Now</button> -->
+              <button id="about_btn" [routerLink]="['/authentication/adminSignin/adminHome/admins']" [ngClass]="{'disabled': !isLoggedIn}"><span id="element3"></span></button>
+            </div>
+          </div>
+        </div>
+    </div>
+  </section>
+  <section class="user" id="Users">
+    <div class="card" id="div_card">
+      <div class="row g-0" id="about_cont">
+        <div class="col-md-4" id="about_image_div">
+            <!-- <img src="../../../../public/assets/about1.jpeg" alt="..." id="about_img"> -->
+          <div class="about_img" id="about_img4"></div>
+        </div>
+        <div class="col-md-8" id="about_text_div">
+          <div class="card-body">
+            <h2 class="card-title">The User</h2>
+            <hr>
+            <h3>All User Related Operations With Just One Click</h3>
+            <p class="card-text">Book your dream hotel room with just one click. We offer a diverse collection of rooms tailored to meet your every need, from luxury suites to budget-friendly options. Our focus is on quality and comfort, ensuring that your travel experience is nothing short of memorable.</p>
+            <!-- <button onclick="location.href='#home'" id="about_btn" [ngClass]="{'disabled': !isLoggedIn}">Book Now</button> -->
+            <button id="about_btn" [routerLink]="['/authentication/adminSignin/adminHome/users']" [ngClass]="{'disabled': !isLoggedIn}">Users</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="profile" id="Profile">
+    <div class="card" id="div_card">
+        <div class="row g-0" id="about_cont">
+          <div class="col-md-4" id="about_image_div">
+            <!-- <img src="../../../../public/assets/about1.jpeg" alt="..." id="about_img"> -->
+             <div class="about_img" id="about_img5"></div>
+          </div>
+          <div class="col-md-8" id="about_text_div">
+            <div class="card-body">
+              <h2 class="card-title">My Profile</h2>
+              <hr>
+              <h3>Update Your Profile With Just One Click</h3>
+              <p class="card-text">Book your dream hotel room with just one click. We offer a diverse collection of rooms tailored to meet your every need, from luxury suites to budget-friendly options. Our focus is on quality and comfort, ensuring that your travel experience is nothing short of memorable.</p>
+              <!-- <button onclick="location.href='#home'" id="about_btn" [ngClass]="{'disabled': !isLoggedIn}">Book Now</button> -->
+              <button id="about_btn" [routerLink]="['/authentication/adminSignin/adminHome/myprofile']" [ngClass]="{'disabled': !isLoggedIn}">Profile</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    </section>
+    <section class="booking" id="Booking">
+      <div class="card" id="div_card">
+          <div class="row g-0" id="about_cont">
+            <div class="col-md-4" id="about_image_div">
+              <!-- <img src="../../../../public/assets/about1.jpeg" alt="..." id="about_img"> -->
+               <div class="about_img" id="about_img6"></div>
+            </div>
+            <div class="col-md-8" id="about_text_div">
+              <div class="card-body">
+                <h2 class="card-title">All Bookings</h2>
+                <hr>
+                <h3>All Booking Related Operations With Just One Click</h3>
+                <p class="card-text">Book your dream hotel room with just one click. We offer a diverse collection of rooms tailored to meet your every need, from luxury suites to budget-friendly options. Our focus is on quality and comfort, ensuring that your travel experience is nothing short of memorable.</p>
+                <!-- <button onclick="location.href='#home'" id="about_btn" [ngClass]="{'disabled': !isLoggedIn}">Book Now</button> -->
+                <button id="about_btn" [routerLink]="['/authentication/adminSignin/adminHome/bookings']" [ngClass]="{'disabled': !isLoggedIn}">All Bookings</button>
+              </div>
+            </div>
+          </div>
+      </div>
+    </section>
+    <section class="update_password mb-5" id="UpdatePassword">
+      <div class="card" id="div_card">
+          <div class="row g-0" id="about_cont">
+            <div class="col-md-4" id="about_image_div">
+              <!-- <img src="../../../../public/assets/about1.jpeg" alt="..." id="about_img"> -->
+               <div class="about_img" id="about_img7"></div>
+            </div>
+            <div class="col-md-8" id="about_text_div">
+              <div class="card-body">
+                <h2 class="card-title">Update Authentication Password</h2>
+                <hr>
+                <h3>Update Admin Authentication Password With Just One Click</h3>
+                <p class="card-text">Book your dream hotel room with just one click. We offer a diverse collection of rooms tailored to meet your every need, from luxury suites to budget-friendly options.</p>
+                <!-- <button onclick="location.href='#home'" id="about_btn" [ngClass]="{'disabled': !isLoggedIn}">Book Now</button> -->
+                <button id="about_btn" [routerLink]="['/authentication/adminSignin/adminHome/passwordupdate']" [ngClass]="{'disabled': !isLoggedIn}" style="font-size:110%;">System Password</button>
+              </div>
+            </div>
+          </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="footer-text">
+          <p>Copyright &copy;2024 by&#64;abisekhdey | All Rights Reserved</p>
+          <div class="footer-icontop">
+              <a href="#" id="fa"><i class="fa-solid fa-angle-up"></i></a>
+          </div>
+      </div>
+  </footer>

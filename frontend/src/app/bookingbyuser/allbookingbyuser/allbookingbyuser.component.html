@@ -1,0 +1,176 @@
+<div id="about">
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page" style="color: black;">Bookings</li>
+    </ol>
+  </nav>
+  <div class="row g-0" id="about_cont">
+      <div class="card-body"> 
+          <div class="col-md-4" id="hotels_div">
+             <div class="show_hotels">
+                  <div class="all_hotels">
+                      <nav class="nav" style="position: sticky">
+                          <ul class="list-group list-group-horizontal d-flex justify-content-center sub_nav" style=" width:100%">
+                              <li class="list-group-item flexible-item" style="border-top-left-radius: .5rem">Sl No.</li>
+                              <li class="list-group-item flexible-item">Booking Id</li>
+                              <li class="list-group-item flexible-item">Hotel Id</li>
+                              <li class="list-group-item flexible-item">Room Id</li>
+                              <li class="list-group-item flexible-item">Room Number</li>
+                              <li class="list-group-item flexible-item">Room Type</li>
+                              <li class="list-group-item flexible-item">Room Price</li>
+                              <li class="list-group-item flexible-item">Check In</li>
+                              <li class="list-group-item flexible-item">Check Out</li>
+                              <li class="list-group-item flexible-item">Created Date</li>
+                              <li class="list-group-item flexible-item">Update Booking</li>
+                              <li class="list-group-item flexible-item" style="border-top-right-radius:.5rem;border-right: 1px solid rgb(222 226 230);">Delete Booking</li>
+                          </ul>
+                      </nav>
+                      <div class="sub_div">
+                          <ul class="list-group list-group-horizontal" *ngFor="let user of bookings; let i = index">
+                              <li class="list-group-item flexible-item">{{ i + 1 }}</li>
+                              <li class="list-group-item flexible-item" style="cursor:text; user-select:text">{{ user._id }}</li>
+                              <li class="list-group-item flexible-item" style="cursor:text; user-select:text">{{ user.room.hotel }}</li>
+                              <li class="list-group-item flexible-item" style="cursor:text; user-select:text">{{ user.room._id }}</li>
+                              <li class="list-group-item flexible-item">{{ user.room.number }}</li>
+                              <li class="list-group-item flexible-item">{{ user.room.type }}</li>
+                              <li class="list-group-item flexible-item">{{ user.room.price }}</li>
+                              <li class="list-group-item flexible-item">{{ user.checkInDate }}</li>
+                              <li class="list-group-item flexible-item">{{ user.checkOutDate }}</li>
+                              <li class="list-group-item flexible-item">{{ user.createdAt }}</li>
+                              <li class="list-group-item flexible-item"><button type="button" class="btn btn-primary update_btn" data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="updateClick(user._id,user.checkInDate,user.checkOutDate)">Update</button></li>
+                              <li class="list-group-item flexible-item"><button type="button" class="btn btn-primary delete_btn" data-bs-toggle="modal" data-bs-target="#exampleModal4" (click)="deleteClick(user._id)">Delete</button></li>
+                    
+                          </ul>
+                          
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>    
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" style="border: 2px solid wheat; background-color: rgb(14, 0, 0,.8);box-shadow: 0 0 1rem darkcyan;color:wheat">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Update Booking Warning</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: rgb(255, 0, 0);"></button>
+        </div>
+        <div class="modal-body">
+            Are You Sure To Update This Booking? You Can Only Update The CheckIn Date And The CheckOut Date Of The Booking!.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">Yes Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Modal-2 -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" style="border: 2px solid wheat; background-color:  rgb(14, 0, 0,.8);box-shadow: 0 0 1rem darkcyan;color:wheat">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Update Booking</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: rgb(255, 0, 0);"></button>
+        </div>
+        <div class="modal-body">
+            <div style="width:100%;display:flex;justify-content:space-evenly;margin-bottom:2%">
+                <div style="width:48%;display:block">
+                  <label for="checkInDate" style="width:100%;font-size:125%;font-weight:bold">Check-in Date:</label>
+                  <input id="checkInDate" type="date" [(ngModel)]="in" name="checkInDate" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                </div>
+                <div style="width:48%;display:block">
+                  <label for="checkOutDate" style="width:100%;font-size:125%;font-weight:bold">Check-out Date:</label>
+                  <input id="checkOutDate" type="date" [(ngModel)]="out" name="checkOutDate" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                </div>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal3" (click)="updateBooking()">Update Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal-3 -->
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" style="border: 2px solid wheat; background-color: rgb(14, 0, 0,.8);box-shadow: 0 0 1rem darkcyan;color:wheat">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Update Status</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: rgb(255, 0, 0);" (click)="reset()"></button>
+        </div>
+        <div class="modal-body">
+          @if(errorstatus===400){
+            Check-out date must be after check-in date.
+          }
+          @if(errorstatus===401){
+            Check-in date must be in the future.
+          }
+          @if(errorstatus===402){
+            Cannot update booking as the check-in date has already passed or is today.
+          }
+          @if(errorstatus===403){
+            Room is already booked for these dates.
+          }
+          @if(errorstatus===500){
+            Fetching booking failed, please try again later.
+          }
+          @if(errorstatus===501){
+            Checking room availability failed, please try again later.
+          }
+          @if(errorstatus===502){
+            Updating booking failed, please try again.
+          }
+          @if(errorstatus===0){
+            Update of Check-in Date And Check-out Date of Booked Room Successful!
+          } 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="reset()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" style="border: 2px solid wheat; background-color: rgb(14, 0, 0,.8);box-shadow: 0 0 1rem darkcyan;color:wheat">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Booking Warning</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: rgb(255, 0, 0);"></button>
+        </div>
+        <div class="modal-body">
+            Are You Sure To Delete This Booking?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal5" (click)="deleteBooking()" style="background-color:red; border:0">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" style="border: 2px solid wheat; background-color: rgb(14, 0, 0,.8);box-shadow: 0 0 1rem darkcyan;color:wheat">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Status</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color: rgb(255, 0, 0);" (click)="reset()"></button>
+        </div>
+        <div class="modal-body">
+            Booking Deleted Successfully!
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="reset()">Close</button>
+          <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2" (click)="deleteBooking()" style="background-color:red">Delete</button> -->
+        </div>
+      </div>
+    </div>
+  </div>

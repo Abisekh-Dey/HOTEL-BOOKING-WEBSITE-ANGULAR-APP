@@ -1,0 +1,383 @@
+        <header class="header">
+            <nav class="navbar">
+                <div id="d3">
+                    <h4 style="cursor: default;"><span id=s1>Book</span><span id="s2">My</span><span id=s3>Room</span></h4>
+                    <i class="fa-solid fa-bars" id="menu-icon"></i>
+                </div>
+                <div id="d2">
+                    <a href="#home" [ngClass]="{'active': activeSection === 'home'}">Home</a>
+                    <a href="#about" [ngClass]="{'active': activeSection === 'about'}">About</a>
+                    <a href="#service" [ngClass]="{'active': activeSection === 'service'}">Service</a>
+                    <a href="#explore" [ngClass]="{'active': activeSection === 'explore'}">Explore</a>
+                    <a href="#contact" [ngClass]="{'active': activeSection === 'contact'}">Contact</a>
+                </div>
+                <!-- <div id="d1">
+                    <a [routerLink]="['/userSignup']" class="header_btn">Sign Up</a>
+                    <a [routerLink]="['/userSignin']" class="header_btn">Sign In</a>
+                </div> -->
+                <div id="d1">
+                    <div *ngIf="isLoggedIn; else loginLinks">
+                        <!-- <span>{{ userName }}</span>
+                        <button (click)="logout()">Logout</button> -->
+                        <div class="dropdown">
+                            <button class="butn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ userName }}
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" [routerLink]="['/updateProfile']">Update Profile</a></li>
+                              <li><a class="dropdown-item" [routerLink]="['/wishlist']"[queryParams]="{ userid: userId }" >Wishlist</a></li>
+                              <li><a class="dropdown-item" [routerLink]="['/bookings']">Booking History</a></li>
+                              <li><a class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2">Settings</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><button class="dropdown-item" type="button" (click)="logout()">Logout<i class="fa-solid fa-arrow-right-from-bracket" id="logout_symbol"></i></button></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <ng-template #loginLinks >
+                        <a [routerLink]="['/userSignup']" class="header_btn" id="b1">Sign Up</a>
+                        <a [routerLink]="['/userSignin']" class="header_btn">Sign In</a>
+                </ng-template>
+            </nav>
+        </header>
+        <section class="home" id="home">
+            <!-- <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="assets/homebg1.jpg" class="d-block w-100" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="assets/homebg2.jpg" class="d-block w-100" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="assets/homebg3.jpg" class="d-block w-100" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="assets/homebg4.jpg" class="d-block w-100" alt="...">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+              </div> -->
+              <div class="home_cont">
+                <div class="text">
+                    <p>Your Perfect Stay, Just a Click Away</p>
+                    <h1>Make Your Next Travel Memorable<br />In Our <span>Hotel</span>.</h1>
+                </div>
+                <form action="#" id="form">
+                    <div class="input">
+                        <div class="input_div">
+                            <div class="sub_div">
+                                <p class="add_bg">Country, City Or Location</p>
+                                <div class="destination_cont">
+                                    <label for="destination" id="destination">
+                                    <select id="destinations" name="destination"></select></label>
+                                </div>
+                                <h3>India</h3>
+                            </div>
+                        </div>
+                        <div class="input_div">
+                            <div class="sub_div">
+                                <p class="add_bg">Check-In</p><input type="date" class="dateInput" name="datein" id="datein"/><br><h3 id="dayin"></h3>
+                            </div>
+                        </div>
+                        <div class="input_div">
+                            <div class="sub_div">
+                                <p class="add_bg">Check-Out</p><input type="date" class="dateInput" name="dateout" id="dateout"/><br><h3 id="dayout"></h3>
+                            </div>
+                        </div>
+                        <div class="input_div">
+                            <div class="sub_div">
+                                <p class="add_bg">Rooms & Guests</p>
+                                <div class="room_cont">
+                                    <label for="rooms" id="room">Rooms
+                                    <select name="rooms" id="rooms" class="roomInput"></select></label>
+                                </div>
+                                <div class="room_cont">
+                                    <label for="persons" id="person">Person
+                                    <select name="persons" id="persons" class="roomInput"></select></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input_div">
+                            <div class="sub_div">
+                                <p class="add_bg">Price Per Night</p>
+                                <div class="price_cont">
+                                    <label for="price" id="price">Price
+                                    <select name="prices" id="prices" class="priceInput"></select></label>
+                                </div>
+                                <h3 id="note">Note: Price Can Vary On Weekends Or Holidays !</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="home_btn" type="submit" value="Search">Search</button>
+                </form>
+              </div>
+        </section>
+        <section class="about" id="about">
+            <div class="card" id="div_card">
+                <div class="row g-0" id="about_cont">
+                  <div class="col-md-4" id="about_image_div">
+                    <img src="assets/about1.jpeg" alt="..." id="about_img">
+                  </div>
+                  <div class="col-md-8" id="about_text_div">
+                    <div class="card-body">
+                      <h2 class="card-title">About Us</h2>
+                      <hr>
+                      <h3>We Focus On Quality Over Quantity</h3>
+                      <p class="card-text">Book your dream hotel room with just one click. We offer a diverse collection of rooms tailored to meet your every need, from luxury suites to budget-friendly options. Our focus is on quality and comfort, ensuring that your travel experience is nothing short of memorable.</p>
+                      <button onclick="location.href='#home'" id="about_btn">Book Now</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </section>
+        <section class="service mb-5" id="service">
+            <div class="card_cont">
+                <div class="about_card_border">
+                    <div class="about_card_header" style="display:flex;justify-content:center">
+                        <h2>We Provide Accommodation Service All Over The India</h2>
+                        <!-- <h3>We Nourish Your Dreams Here.</h3> -->
+                    </div>
+                    <div class="card_cont_inner">
+                        <div class="card mb-3 service_card">
+                            <img src="assets/about2.jpeg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title" style="display: flex;justify-content:center">Normal Rooms</h5>
+                              <hr>
+                              <p class="card-text" style="height: 170px;">Our Normal Rooms are perfect for budget-conscious travelers. Each room accommodates up to six guests and includes free Wi-Fi. While air conditioning, meals, and extras like city travel or guided tours are not included, these rooms offer essential comfort at an affordable rate. Non-refundable and ideal for those seeking simplicity, they also come with perks for our regular customers.</p>
+                            </div>
+                        </div>
+            
+                        <div class="card mb-3 service_card">
+                            <img src="assets/about3.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title" style="display: flex;justify-content:center">Delux Rooms</h5>
+                              <hr>
+                              <p class="card-text" style="height: 170px;">Our Deluxe Rooms offer a blend of comfort and convenience, ideal for up to six guests. These rooms come with air conditioning, free Wi-Fi, complimentary breakfast, and either lunch or dinner. Guests can also enjoy free city travel within a 2 km radius. While guided tours are not included, Deluxe Rooms are a non-refundable option that provides excellent value, with special perks for our Gold customers.</p>
+                            </div>
+                        </div>
+            
+                        <div class="card mb-3 service_card">
+                            <img src="assets/about4.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title" style="display: flex;justify-content:center">Suite Rooms</h5>
+                              <hr>
+                              <p class="card-text" style="height: 170px;">Our Suite Rooms provide the ultimate in luxury and comfort, accommodating up to six guests. Enjoy air conditioning, free Wi-Fi, complimentary breakfast, plus both lunch and dinner. Suites also include free city travel and guided sightseeing tours. Though non-refundable, these rooms offer exclusive benefits for our Gold-Premium customers, making them the perfect choice for a truly indulgent stay.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="explore mb-5" id="explore">
+            <div class="card_cont">
+                <div class="about_card_border">
+                    <div class="about_card_header" style="display:flex;justify-content:center">
+                        <h2>Explore Hotels In Different Cities Of India</h2>
+                        <!-- <h3>We Nourish Your Dreams Here.</h3> -->
+                    </div>
+                    <div class="card_cont_inner">
+                        <div class="card mb-3" id="card1" style="height: 570px;">
+                            <img src="assets/about2.jpeg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Kolkata</h5>
+                              <hr>
+                              <p class="card-text" style="height: 170px;">Find a perfect hotel in the vibrant city of Kolkata. Whether you're here for business or leisure, our curated selection of accommodations offers comfort, convenience, and luxury. </p>
+                              <button (click)="showhotels(d1)" id="about_btn">Book Now</button>
+                            </div>
+                        </div>
+            
+                        <div class="card mb-3" id="card2" style="height: 570px;">
+                            <img src="assets/about3.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Delhi</h5>
+                              <hr>
+                              <p class="card-text" style="height: 170px;">Find a perfect hotel in the vibrant city of Delhi. Whether you're here for business or leisure, our curated selection of accommodations offers comfort, convenience, and luxury. </p>
+                              <button (click)="showhotels(d2)" id="about_btn">Book Now</button>
+                            </div>
+                        </div>
+            
+                        <div class="card mb-3" id="card3" style="height: 570px;">
+                            <img src="assets/about4.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Mumbai</h5>
+                              <hr>
+                              <p class="card-text" style="height: 170px;">Find a perfect hotel in the vibrant city of Mumbai. Whether you're here for business or leisure, our curated selection of accommodations offers comfort, convenience, and luxury. </p>
+                              <button (click)="showhotels(d3)" id="about_btn">Book Now</button>
+                            </div>
+                        </div>
+
+                        <div class="card mb-3" id="card1" style="height: 570px;">
+                            <img src="assets/about2.jpeg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Bangalore</h5>
+                              <hr>
+                              <p class="card-text" style="height: 170px;">Find a perfect hotel in the vibrant city of Bangalore. Whether you're here for business or leisure, our curated selection of accommodations offers comfort, convenience, and luxury. </p>
+                              <button (click)="showhotels(d4)" id="about_btn">Book Now</button>
+                            </div>
+                        </div>
+            
+                        <div class="card mb-3" id="card2" style="height: 570px;">
+                            <img src="assets/about3.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Chennai</h5>
+                              <hr>
+                              <p class="card-text" style="height: 170px;">Find a perfect hotel in the vibrant city of Chennai. Whether you're here for business or leisure, our curated selection of accommodations offers comfort, convenience, and luxury. </p>
+                              <button (click)="showhotels(d5)" id="about_btn">Book Now</button>
+                            </div>
+                        </div>
+            
+                        <div class="card mb-3" id="card3" style="height: 570px;">
+                            <img src="assets/about4.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Hydrabad</h5>
+                              <hr>
+                              <p class="card-text" style="height: 170px;">Find a perfect hotel in the vibrant city of Hydrabad. Whether you're here for business or leisure, our curated selection of accommodations offers comfort, convenience, and luxury. </p>
+                              <button (click)="showhotels(d6)" id="about_btn">Book Now</button>
+                            </div>
+                        </div>
+
+                        <div class="card mb-3" id="card1" style="height: 570px;">
+                            <img src="assets/about2.jpeg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Ahmedabad</h5>
+                              <hr>
+                              <p class="card-text" style="height: 170px;">Find a perfect hotel in the vibrant city of Ahmedabad. Whether you're here for business or leisure, our curated selection of accommodations offers comfort, convenience, and luxury. </p>
+                              <button (click)="showhotels(d7)" id="about_btn">Book Now</button>
+                            </div>
+                        </div>
+            
+                        <div class="card mb-3" id="card2" style="height: 570px;">
+                            <img src="assets/about3.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Pune</h5>
+                              <hr>
+                              <p class="card-text" style="height: 170px;">Find a perfect hotel in the vibrant city of Pune. Whether you're here for business or leisure, our curated selection of accommodations offers comfort, convenience, and luxury. </p>
+                              <button (click)="showhotels(d8)" id="about_btn">Book Now</button>
+                            </div>
+                        </div>
+            
+                        <div class="card mb-3" id="card3" style="height: 570px;">
+                            <img src="assets/about4.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Jaipur</h5>
+                              <hr>
+                              <p class="card-text" style="height: 170px;">Find a perfect hotel in the vibrant city of Jaipur. Whether you're here for business or leisure, our curated selection of accommodations offers comfort, convenience, and luxury. </p>
+                              <button (click)="showhotels(d9)" id="about_btn">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contact" class="contact-section mb-5">
+            <div class="about_card_border">
+                <div class="about_card_header" style="display:flex;justify-content:center">
+                    <h2>Contact Us</h2>
+                </div>
+                <!-- <hr> -->
+                <div class="contact-content">
+                    <div class="contact-form">
+                        <p>Have questions or need help? We're here for you!</p>
+                        <form action="/send-message" method="POST">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder="Your Name" required [(ngModel)]="feedback.name">
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="Your Email" required [(ngModel)]="feedback.email">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="subject" name="subject" placeholder="Subject" required [(ngModel)]="feedback.subject">
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" name="message" rows="5" placeholder="Your Message" required [(ngModel)]="feedback.message" style="height: 230px;"></textarea>
+                            </div>
+                            <div class="d-flex" style="justify-content:center">
+                                <button id="about_btn" style="padding:1% 1%;" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="saveMessage()">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+        
+                    <div class="contact-info">
+                        <h3>Get in Touch</h3>
+                        <div class="contacts">
+                            <p><i class="fa-solid fa-phone" style="font-size: 150%;"></i> +91 8617244589</p>
+                            <p><i class="fa-brands fa-square-whatsapp" style="font-size: 150%;"></i> +91 8617244589</p>
+                            <p><i class="fa-solid fa-envelope" style="font-size: 150%;"></i> abisekhdey17&#64;gmail.com</p>
+                            <p><i class="fa-solid fa-location-dot" style="font-size: 150%;"></i> 1234 Street Name, City, Country</p>
+                            <div class="social-icon">
+                                <a href="https://www.facebook.com/abisekh.dey.18" target="_main" style="font-size: 150%;"><i class="fa-brands fa-facebook"></i></a>
+                                <a href="https://github.com/Abisekh-Dey" target="_main" style="font-size: 150%;"><i class="fa-brands fa-github"></i></a>
+                                <a href="https://www.instagram.com/abisekhdey/" target="_main" style="font-size: 150%;"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="https://www.linkedin.com/in/abisekh-dey-a01589228/" target="_main" style="font-size: 150%;"><i class="fa-brands fa-linkedin"></i></a>
+                                <a href="https://abisekh-dey-portfolio.netlify.app/" target="_main" style="font-size: 150%;"><i class="fa-solid fa-user-tie"></i></a>
+                            </div>
+                        </div>
+                        <div class="map">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13934.25425537308!2d88.36139105059625!3d22.844185026391365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDA4JzQ4LjAiTiA4OBwzMDE5MjAiRQ!5e0!3m2!1sen!2sin!4v1632755070325!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="footer">
+            <div class="footer-text">
+                <p>Copyright &copy;2024 by&#64;abisekhdey | All Rights Reserved</p>
+                <div class="footer-icontop">
+                    <a href="#" id="fa"><i class="fa-solid fa-angle-up"></i></a>
+                </div>
+            </div>
+        </footer>
+        
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content" style="border: 2px solid wheat; background-color:  rgba(21, 0, 3, 0.9);box-shadow: 0 0 1rem darkcyan;color:wheat">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Feedback Message</h1>
+                  <button type="button" class="btn-close" id="close" data-bs-dismiss="modal" aria-label="Close" (click)="reset()"></button>
+                </div>
+                <div class="modal-body" style="display: flex;justify-content:center">
+                  @if(errorstatus===0){
+                    Congratulation! Message Sent Successfully!
+                  }
+                  @if(errorstatus===422){
+                    Invalid inputs passed, please check your data.
+                  }
+                  @if(errorstatus===505){
+                    Sending Message failed, please try again.
+                  }
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="reset()">Close</button>
+                  <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal" [routerLink]="['/bookings']">See All Bookings</button> -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content" style="border: 2px solid wheat; background-color:  rgba(21, 0, 3, 0.9);box-shadow: 0 0 1rem darkcyan;color:wheat">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Settings</h1>
+                  <button type="button" class="btn-close" id="close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="display: flex;justify-content:center">
+                  Settings Panel Will Be Added Soon...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal" [routerLink]="['/bookings']">See All Bookings</button> -->
+                </div>
+              </div>
+            </div>
+          </div>

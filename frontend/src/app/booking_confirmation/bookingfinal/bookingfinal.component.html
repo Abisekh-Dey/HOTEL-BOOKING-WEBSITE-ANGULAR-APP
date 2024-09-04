@@ -1,0 +1,89 @@
+<!-- <h1>User Id: {{booking.userId}}</h1>
+<h1>Room Id: {{booking.roomId}}</h1>
+<h1>{{booking.checkIn}}</h1>
+<h1>{{booking.checkOut}}</h1>
+<h1>{{room_type}}</h1>
+<h1>{{room_price}}</h1>
+<h1>{{room_ac}}</h1>
+<h1>{{room_number}}</h1>
+<div *ngFor="let i of booking.guests">
+    <h1>{{i.name}}</h1>
+    <h1>{{i.age}}</h1>
+    <h1>{{i.contact}}</h1>
+</div> -->
+<div class="d1">
+    <div class="card" style="width: 100%;border-radius:.5rem">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img class="img">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title" style="border-radius:.5rem;background-color:rgb(255, 202, 104);padding:1.5% 0">Booking Details</h5>
+              <div style="width: 100%; height:100%;border:2px solid darkblue;padding:1.5% 1%;border-radius:.5rem">
+                <h6 class="d-flex"><i class="fa-brands fa-fort-awesome" style="width: 3%;margin-right:1%"></i>Hotel Name: {{hotelname}}</h6>
+                <h6 class="d-flex"><i class="fa-solid fa-user" style="width: 3%;margin-right:1%"></i>User Id: {{booking.userId}}</h6>
+                <h6 class="d-flex"><i class="fa-solid fa-door-open" style="width: 3%;margin-right:1%"></i>Room Id: {{booking.roomId}}</h6>
+                <h6 class="d-flex"><i class="fa-solid fa-hotel" style="width: 3%;margin-right:1%"></i>Hotel Id: {{hotelId}}</h6>
+                <h6 class="d-flex"><i class="fa-solid fa-hashtag" style="width: 3%;margin-right:1%"></i>Room Number: {{room_number}}</h6>
+                <h6 class="d-flex"><i class="fa-solid fa-bed" style="width: 3%;margin-right:1%"></i>Room Type: {{room_type}}</h6>
+                <h6 class="d-flex"><i class="fa-solid fa-temperature-arrow-up" style="width: 3%;margin-right:1%"></i>Room Ac: {{room_ac}}</h6>
+                <div *ngFor="let i of booking.guests; let j = index">
+                  <h6 class="d-flex"><i class="fa-solid fa-people-group" style="margin-right:1%"></i>Sl No. {{j+1}} Guests: {{i.name}}</h6>
+                </div>
+                <h6 class="d-flex"><i class="fa-solid fa-plane-arrival" style="width: 3%;margin-right:1%"></i>CheckIn Date: {{booking.checkIn}}</h6>
+                <h6 class="d-flex"><i class="fa-solid fa-plane-departure" style="width: 3%;margin-right:1%"></i>CheckOut Date: {{booking.checkOut}}</h6>
+                <h6 class="d-flex"><i class="fa-solid fa-calendar-days" style="width: 3%;margin-right:1%"></i>Booking Date: {{actualdate}}</h6>
+                <h6 class="d-flex"><i class="fa-solid fa-tag" style="width: 3%;margin-right:1%"></i>Room Price: ₹ {{room_price}}</h6>
+                <h6 class="d-flex"><i class="fa-solid fa-money-bill-wave" style="width: 3%;margin-right:1%"></i>GST & Taxes & Fees: ₹ {{gst}}</h6>
+                <h4 id="note">Final Price (With Added Taxes): ₹ {{room_price+gst}}</h4>
+              </div>
+            </div>
+            <div class="d-grid" style="padding:0 1rem 1rem;">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="saveBooking()">Confirm Booking</button>
+              </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="border: 2px solid wheat; background-color:  rgba(21, 0, 3, 0.9);box-shadow: 0 0 1rem darkcyan;color:wheat">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Booking Message</h1>
+        <button type="button" class="btn-close" id="close" data-bs-dismiss="modal" aria-label="Close" (click)="reset()" [routerLink]="['/']"></button>
+      </div>
+      <div class="modal-body" style="display: flex;justify-content:center">
+        @if(errorstatus===0){
+          <i class="fa-solid fa-trophy" style="margin-right: 2%; font-size:140%;color:gold"></i><span style="color:greenyellow"> Congratulation! Booking Successful!</span>
+        }
+        @if(errorstatus===422){
+          Invalid inputs passed, please check your data.
+        }
+        @if(errorstatus===400){
+          Check-out date must be after check-in date.
+        }
+        @if(errorstatus===500){
+          Fetching room failed, please try again later.
+        }
+        @if(errorstatus===404){
+          Room not found.
+        }
+        @if(errorstatus===401){
+          Room is already booked for these dates.
+        }
+        @if(errorstatus===501){
+          Checking room availability failed, please try again later.
+        }
+        @if(errorstatus===502){
+          Creating booking failed, please try again.
+        }
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="reset()" [routerLink]="['/']">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" [routerLink]="['/bookings']">See All Bookings</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,135 @@
+<section class="vh-100 bg-image">
+  <div class="form_div">
+    <div class="close">
+      <button type="button" class="btn-close" aria-label="Close" [routerLink]="['/']"></button>
+  </div>
+    <h2 class="text-uppercase text-center">Create an account</h2>
+  <form>
+    @if (!submitted) {
+      <!-- @if(emptyFields){
+        <div class="alert alert-danger" role="alert">
+          <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+          Please fill up the form correctly!
+        </div>
+      }
+      @if(adminExist){
+        <div class="alert alert-danger" role="alert">
+          <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+          You already have an account please Sign In!
+        </div>
+      } -->
+      @if(errorstatus===422){
+        <div class="alert alert-danger" role="alert">
+          <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+          Please fill up the form correctly!
+        </div>
+      }
+      @if(errorstatus===403){
+        <div class="alert alert-danger" role="alert">
+          <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+          Password not found, could not log you in!
+        </div>
+      }
+      @if(errorstatus===420){
+        <div class="alert alert-danger" role="alert">
+          <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+          You already have an account, please Sign In!
+        </div>
+      }
+      @if(errorstatus===500){
+        <div class="alert alert-danger" role="alert">
+          <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+          Authentication failed, please try again later!
+        </div>
+      }
+      @if(errorstatus===501){
+        <div class="alert alert-danger" role="alert">
+          <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+          Authentication failed, please try after sometime!
+        </div>
+      }
+      @if(errorstatus===502){
+        <div class="alert alert-danger" role="alert">
+          <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+          Authentication failed, invalid authentication password!
+        </div>
+      }
+      @if(errorstatus===503){
+        <div class="alert alert-danger" role="alert">
+          <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+          Signing up failed, please try again later!
+        </div>
+      }
+      @if(errorstatus===504){
+        <div class="alert alert-danger" role="alert">
+          <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+          Could not create admin, please try again!
+        </div>
+      }
+      @if(errorstatus===505){
+        <div class="alert alert-danger" role="alert">
+          <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+          Creating Admin failed, please try again!
+        </div>
+      }
+      <div data-mdb-input-init class="form-outline mb">
+        <label class="form-label" for="form3Example1cg">Your Name</label>
+        <input type="text" placeholder="Enter Name" class="form-control form-control-lg" required [(ngModel)]="admin.name" name="name"/>
+      </div>
+              
+      <div data-mdb-input-init class="form-outline mb">
+        <label class="form-label" for="form3Example3cg">Your Email</label>
+        <input type="email" placeholder="Enter Email" class="form-control form-control-lg" required [(ngModel)]="admin.email" name="email"/>
+      </div>
+
+      <div data-mdb-input-init class="form-outline mb">
+        <label class="form-label" for="form3Example4cg">Your Contact Number</label>
+        <input type="contact_no" placeholder="Enter Contact Number" class="form-control form-control-lg" required [(ngModel)]="admin.contact_no" name="contact_no"/>
+      </div>
+              
+      <div data-mdb-input-init class="form-outline mb">
+        <label class="form-label" for="form3Example4cg">Password</label>
+        <input type="password" placeholder="Enter Password" class="form-control form-control-lg" required [(ngModel)]="admin.password" name="password"/>
+      </div>
+              
+      <div data-mdb-input-init class="form-outline mb">
+        <label class="form-label" for="form3Example4cdg">Repeat your password</label>
+        <input type="password" placeholder="Re-Enter Password" class="form-control form-control-lg"
+          [ngClass]="{
+            'is-invalid': passwordsMatch() === false,
+            'is-valid': passwordsMatch() === true
+          }" required [(ngModel)]="admin.confirmPassword" name="confirmPassword"/>
+      </div>
+
+      <div data-mdb-input-init class="form-outline mb">
+        <label class="form-label" for="form3Example4cdg">Enter authentication password</label>
+        <input type="password" placeholder="Enter Authentication Password" class="form-control form-control-lg"
+           required [(ngModel)]="admin.authentication_password" name="autentication_password"/>
+      </div>
+              
+      <div class="form-check d-flex justify-content-center mb">
+          <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
+          <label class="form-check-label" for="form2Example3g">
+            I agree all statements in <a href="#!" class="text-body"><u style="color: blue;">Terms of service</u></a>
+          </label>
+      </div>
+              
+      <div class="d-flex justify-content-center mb">
+        <button  type="button" class="btn" (click)="saveAdmin()">Register</button>
+      </div>
+              
+      <p class="text-center">Have already an admin account? <a [routerLink]="['/authentication/adminSignin']" class="fw-bold text-body"><u style="color: blue;">Login here</u></a></p>
+    } @else {
+        <!-- <h4 class="text-uppercase text-center" id="success">admin was submitted successfully!</h4> -->
+        <div class="alert alert-success " role="alert">
+          <i class="fa-regular fa-circle-check" id="success_symbol"></i>
+          Congratulations! Account created successfully!
+        </div>
+        <div class="d-flex justify-content-center mb">
+          <button class="btn" [routerLink]="['/authentication/adminSignup/adminHome']" >Admin Home</button>
+        </div>
+          <p class="text-center">Have already an admin account? <a [routerLink]="['/authentication/adminSignin']" class="fw-bold text-body"><u style="color: blue;">Login here</u></a></p>
+        }
+  </form>
+  </div>  
+</section>

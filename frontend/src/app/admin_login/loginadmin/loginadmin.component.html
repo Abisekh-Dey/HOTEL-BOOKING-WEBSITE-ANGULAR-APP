@@ -1,0 +1,100 @@
+<section class="vh-100 bg-image">
+    <div class="form_div form_div_increased">
+        <div class="close">
+            <button type="button" class="btn-close" aria-label="Close" [routerLink]="['/']"></button>
+        </div>
+        <h2 class="text-uppercase text-center">admin Login</h2>
+      <div [ngClass]="{'flipped': contact}">
+        <form [ngClass]="{'flipped': contact}">
+          @if (!submitted) {
+            <!-- @if(invalidadmin){
+              <div class="alert alert-danger" role="alert">
+                <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+                Please check the email id or password you have entered!
+              </div>
+            } -->
+            @if(errorstatus===422){
+              <div class="alert alert-danger" role="alert">
+                <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+                Please fill up the form correctly!
+              </div>
+            }
+            @if(errorstatus===500){
+              <div class="alert alert-danger" role="alert">
+                <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+                Login failed, please try again later!
+              </div>
+            }
+            @if(errorstatus===403){
+              <div class="alert alert-danger" role="alert">
+                <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+                Please check the email id or password you have entered!
+              </div>
+            }
+            @if(errorstatus===501){
+              <div class="alert alert-danger" role="alert">
+                <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+                Could not log you in, please check your credentials and try again!
+              </div>
+            }
+            @if(errorstatus===502){
+              <div class="alert alert-danger" role="alert">
+                <i class="fa-solid fa-circle-exclamation" id="danger_symbol"></i>
+                Logging in failed, please try again!
+              </div>
+            }
+            <div data-mdb-input-init class="form-outline mb">
+              <label class="form-label" for="form3Example3cg">Enter admin Email</label>
+              <input type="email" placeholder="Enter admin Email" id="form3Example3cg" class="form-control form-control-lg" required [(ngModel)]="admin.email" name="email"/>
+            </div>
+            @if(contact){
+              <div data-mdb-input-init class="form-outline mb">
+                <label class="form-label" for="form3Example4cg">Enter admin Contact Number</label>
+                <input type="contact_number" placeholder="Enter Contact Number" id="form3Example4cg" class="form-control form-control-lg" required [(ngModel)]="admin.contact_no" name="contact_number"/>
+              </div>
+            }       
+            @else{
+              <div data-mdb-input-init class="form-outline mb">
+                <label class="form-label" for="form3Example4cg">Enter admin Password</label>
+                <input type="password" placeholder="Enter Password" id="form3Example4cg" class="form-control form-control-lg" required [(ngModel)]="admin.password" name="password"/>
+              </div>
+            } 
+            
+            <div class="form-check d-flex justify-content-center mb">
+                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3cg" />
+                <label class="form-check-label" for="form2Example3g">Remember Me</label>
+            </div>
+            
+            @if(contact){
+              <div class="d-flex justify-content-center mb">
+                <button  type="button" class="btn" (click)="backuploginAdmin()">LOGIN</button>
+              </div>
+            }
+            @else{
+              <div class="d-flex justify-content-center mb">
+                <button  type="button" class="btn" (click)="loginAdmin()">LOGIN</button>
+              </div>
+            }
+            
+            @if(errorstatus==403 && contact==false){
+              <p class="text-center">Login using contact number? <a (click)="forget()" class="fw-bold text-body"><u style="color: blue;">Click Here</u></a></p>
+            }
+            @if(errorstatus==403 && contact==true){
+              <p class="text-center">Login using password? <a (click)="reset()" class="fw-bold text-body"><u style="color: blue;">Click Here</u></a></p>
+            }
+                    
+            <p class="text-center">Dont't have an admin account? <a [routerLink]="['/authentication/adminSignup']" class="fw-bold text-body"><u style="color: blue;">Register here</u></a></p>
+          } @else {
+              <!-- <h4 class="text-uppercase text-center" id="success">Log in successfull!</h4> -->
+              <div class="alert alert-success " role="alert">
+                <i class="fa-regular fa-circle-check" id="success_symbol"></i>
+                Congratulations! Log in successfull!
+              </div>
+              <div class="d-flex justify-content-center mb">
+                <button class="btn" [routerLink]="['/authentication/adminSignin/adminHome']" >Admin Home</button>
+              </div>
+            }
+        </form>
+      </div>
+    </div>  
+  </section>

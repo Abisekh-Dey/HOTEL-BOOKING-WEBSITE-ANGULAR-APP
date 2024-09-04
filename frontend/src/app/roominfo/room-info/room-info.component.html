@@ -1,0 +1,516 @@
+<div class="card mb-3" id="div_card">
+    <div id="about_cont">
+        <div class="row g-0 sub_cont">
+            <div class="col-md-4" id="about_image_div_upper" style="width: 40%;height:auto;padding:1.2% 0">
+                <img [src]="'../../../assets/' + image" alt="..." style="width:100%;height:100%;border-radius:.8rem;object-fit:fill;box-shadow: 0 0 1rem rgb(49, 0, 128);border: 3px solid rgb(14, 2, 93);">
+              </div>
+              <div class="col-md-8" id="about_text_div" style="width: 60%; border:0;background:none">
+                <div class="card-body">
+                  <h2 class="card-title" style="background-color: lightsalmon;">{{name}}</h2>
+                  <p class="card-text">Hey, Visitor!<br>Hotel {{name}} extends a warm invitation to experience our hospitality and explore the finest services we have to offer. For over 15 years, we've been committed to delivering excellence, with a focus on customer satisfaction and the highest quality service. We look forward to welcoming you and making your stay truly memorable.</p>
+                  <h4>Our Services</h4>
+                  <hr>
+                  <h6><i class="fa-solid fa-bed"></i> Our Rooms: We Provide Three Types Of Rooms: [Normal, Delux & Suite</h6>
+                  <h6><i class="fa-solid fa-wifi"></i> Free WIFI: We Prrovide Free WIFI To All Customers </h6>
+                  <h6><i class="fa-solid fa-burger"></i> Free Breakfast: We Provide Free Breakfast To Gold And Gold-Premium Customers</h6>
+                  <h6><i class="fa-solid fa-utensils"></i> Free Meal: We Provide Free Meal To Gold And Gold-Premium Customers</h6>
+                  <h6><i class="fa-solid fa-car-side"></i> Free City Travel: We Provide Free Travel To Gold And Gold-Premium Customers</h6>
+                  <h6><i class="fa-solid fa-mountain-sun"></i> Side Scene With Experienced Guide: Only For Gold-Premium Customers</h6>
+                  <h6><i class="fa-solid fa-wallet"></i> Booking Amount Is Non-Refundable </h6>
+                  <div style="display: flex;align-items: center;gap: 10px;margin-top:2%">
+                    <button id="about_btn1" onclick="location.href='#allrooms'">Book Rooms Now</button> 
+                    <a href="#allrooms">{{rooms_length}} More Options</a>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+
+<div id="allrooms">
+    <div class="card mb-3" id="div_card">
+        <div class="row g-0 mb-3" id="about_cont"  *ngFor="let i of rooms[0]">
+          <div class="col-md-4" id="about_image_div">
+            <img [src]="'../../../assets/' + i.images[0]" alt="..." id="about_img_1">
+            <img [src]="'../../../assets/' + i.images[1]" alt="..." id="about_img_2">
+            <img [src]="'../../../assets/' + i.images[2]" alt="..." id="about_img_3">
+          </div>
+          <div class="col-md-8" id="about_text_div">
+            <div class="card-body">
+                <div *ngIf="i.type === 'normal'||i.type === 'normal (1 person)'||i.type === 'normal (2 person)'||i.type === 'normal (3 person)'||i.type === 'normal (4 person)'||i.type === 'Family normal (5 person)'||i.type === 'Family normal (6 person)'">
+                    <h4 class="card-title">Room No: {{i.number}} [Normal Room]</h4>
+                    <h4>Room Services</h4>
+                    <hr>
+                    <div class="separator">
+                        <div class="sub_sep1">
+                            <h6><i class="fa-solid fa-bed"></i> Room Type: Normal</h6>
+                            <h6><i class="fa-solid fa-person"></i> Persons Can Accommodate: {{i.type.slice(-9,-8)}}</h6>
+                            <h6><i class="fa-solid fa-temperature-arrow-up"></i> Ac Availablity: {{ i.isAc }}</h6>
+                            <h6><i class="fa-solid fa-wifi"></i> Free WIFI: Yes </h6>
+                            <h6><i class="fa-solid fa-burger"></i> Free Breakfast: No</h6>
+                            <h6><i class="fa-solid fa-utensils"></i> Free Meal: No</h6>
+                            <h6><i class="fa-solid fa-wallet"></i> Non-Refundable </h6>
+                            <h6><i class="fa-solid fa-car-side"></i> Free City Travel: No</h6>
+                            <h6><i class="fa-solid fa-mountain-sun"></i> Side Scene With Experienced Guide: No</h6>
+                            <h6><i class="fa-regular fa-star"></i> Regular Customer</h6>
+                        </div>
+                        <div class="sub_sep2">
+                            <h3><i class="fa-solid fa-indian-rupee-sign"></i> Price: {{i.price}}/- </h3>
+                            <h6>+₹ 768 taxes & fees / Per Night</h6>
+                            <button id="about_btn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="bookClick(i._id,i.type.slice(-9,-8),i.type,i.price,i.isAc,i.number,768)">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="i.type === 'delux'||i.type === 'delux (1 person)'||i.type === 'delux (2 person)'||i.type === 'delux (3 person)'||i.type === 'delux (4 person)'||i.type === 'Family delux (5 person)'||i.type === 'Family delux (6 person)'">
+                    <h4 class="card-title">Room No: {{i.number}} [Room With Free Breakfast & Lunch/Dinner]</h4>
+                    <h4>Room Services</h4>
+                    <hr>
+                    <div class="separator">
+                        <div class="sub_sep1">
+                            <h6><i class="fa-solid fa-bed"></i> Room Type: Delux</h6>
+                            <h6><i class="fa-solid fa-person"></i> Persons Can Accommodate: {{i.type.slice(-9,-8)}}</h6>
+                            <h6><i class="fa-solid fa-temperature-arrow-up"></i> Ac Availablity: {{ i.isAc }}</h6>
+                            <h6><i class="fa-solid fa-wifi"></i> Free WIFI: Yes </h6>
+                            <h6><i class="fa-solid fa-burger"></i> Free Breakfast: Yes</h6>
+                            <h6><i class="fa-solid fa-utensils"></i> Free Meal: Lunch/Dinner</h6>
+                            <h6><i class="fa-solid fa-car-side"></i> Free City Travel: Within 2 Km </h6>
+                            <h6><i class="fa-solid fa-mountain-sun"></i> Side Scene With Experienced Guide: No</h6>
+                            <h6><i class="fa-solid fa-wallet"></i> Non-Refundable </h6>
+                            <h6><i class="fa-solid fa-star"></i> Gold Customer </h6>
+                        </div>
+                        <div class="sub_sep2">
+                            <h3><i class="fa-solid fa-indian-rupee-sign"></i> Price: {{i.price}}/- </h3>
+                            <h6>+₹ 1512 taxes & fees / Per Night</h6>
+                            <button id="about_btn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="bookClick(i._id,i.type.slice(-9,-8),i.type,i.price,i.isAc,i.number,1512)">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="i.type === 'suite'||i.type === 'suite (2 person)'||i.type === 'suite (3 person)'||i.type === 'suite (4 person)'||i.type === 'Family suite (5 person)'||i.type === 'Family suite (6 person)'">
+                    <h4 class="card-title">Room No: {{i.number}} [Room With Free Breakfast & Lunch+Dinner]</h4>
+                    <h4>Room Services</h4>
+                    <hr>
+                    <div class="separator">
+                        <div class="sub_sep1">
+                            <h6><i class="fa-solid fa-bed"></i> Room Type: Suite</h6>
+                            <h6><i class="fa-solid fa-person"></i> Persons Can Accommodate: {{i.type.slice(-9,-8)}}</h6>
+                            <h6><i class="fa-solid fa-temperature-arrow-up"></i> Ac Availablity: {{ i.isAc }}</h6>
+                            <h6><i class="fa-solid fa-wifi"></i> Free WIFI: Yes </h6>
+                            <h6><i class="fa-solid fa-burger"></i> Free Breakfast: Yes</h6>
+                            <h6><i class="fa-solid fa-utensils"></i> Free Meal:  Lunch + Dinner</h6>
+                            <h6><i class="fa-solid fa-wallet"></i> Non-Refundable </h6>
+                            <h6><i class="fa-solid fa-car-side"></i> Free City Travel: Yes</h6>
+                            <h6><i class="fa-solid fa-mountain-sun"></i> Side Scene With Experienced Guide: Yes</h6>
+                            <h6><i class="fa-solid fa-medal"></i> Gold-Premium Customer</h6>
+                        </div>
+                        <div class="sub_sep2">
+                            <h3><i class="fa-solid fa-indian-rupee-sign"></i> Price: {{i.price}}/- </h3>
+                            <h6>+₹ 1692 taxes & fees / Per Night</h6>
+                            <button id="about_btn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="bookClick(i._id,i.type.slice(-9,-8),i.type,i.price,i.isAc,i.number,1692)">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+              <!-- <p class="card-text">Book your dream hotel room with just one click. We offer a diverse collection of rooms tailored to meet your every need, from luxury suites to budget-friendly options. Our focus is on quality and comfort, ensuring that your travel experience is nothing short of memorable.</p> -->
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  @if(loggedIn){
+    <div class="modal-dialog" style="max-width:90%">
+      <div class="modal-content" style="border: 2px solid wheat; background-color:  rgba(21, 0, 3, 0.9);box-shadow: 0 0 1rem darkcyan;color:wheat">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Booking Form</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close" (click)="reset()"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+              <!-- User ID and Room ID side by side -->
+              <div style="width:100%;display:flex;justify-content:space-between;margin-bottom:2%">
+                <div style="width:28%;display:block">
+                  <label for="userId" style="width:100%;font-size:125%;font-weight:bold">User ID:</label>
+                  <input id="userId" type="text" [(ngModel)]="booking.userId" name="userId" required disabled style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                </div>
+                <div style="width:28%;display:block">
+                  <label for="roomId" style="width:100%;font-size:125%;font-weight:bold">Room ID:</label>
+                  <input id="roomId" type="text" [(ngModel)]="booking.roomId" name="roomId" required disabled style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                </div>
+                <div style="width:28%;display:block">
+                  <label for="roomId" style="width:100%;font-size:125%;font-weight:bold">Hotel ID:</label>
+                  <input id="hotelId" type="text" [(ngModel)]="id" name="hotelId" required disabled style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                </div>
+              </div>
+            
+              <!-- Check-in and Check-out side by side -->
+              <div style="width:100%;display:flex;justify-content:space-between;margin-bottom:2%">
+                <div style="width:28%;display:block">
+                  <label for="checkInDate" style="width:100%;font-size:125%;font-weight:bold">Check-in Date:</label>
+                  <input id="checkInDate" type="date" [(ngModel)]="booking.checkIn" name="checkInDate" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                </div>
+                <div style="width:28%;display:block">
+                  <label for="checkOutDate" style="width:100%;font-size:125%;font-weight:bold">Check-out Date:</label>
+                  <input id="checkOutDate" type="date" [(ngModel)]="booking.checkOut" name="checkOutDate" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                </div>
+                <div style="width:28%;display:block">
+                  <label for="checkOutDate" style="width:100%;font-size:125%;font-weight:bold">Booking Date:</label>
+                  <input id="bookingDate" type="text" [(ngModel)]="today" name="bookingDate" required disabled style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                </div>
+              </div>
+            
+              <!-- Guest 1 Details -->
+              <div *ngFor="let guest of booking.guests; let j = index">
+                <!-- Conditionally Render the Header for Each Guest -->
+                <h5 style="width:100%;">
+                  Enter Details Of Guest {{j + 1}} 
+                  <span *ngIf="j === 0">(User Itself)</span>
+                </h5>
+                
+                <div style="width:100%; display:flex; justify-content:space-between; margin-bottom:1%">
+                  <div style="display: flex; justify-content: space-between;">
+                    
+                    <!-- Guest Name Field -->
+                    <div style="width:28%; display:block">
+                      <label for="guestName{{j}}" style="width:100%; font-size:125%; font-weight:bold">Guest Name:</label>
+                      <input id="guestName{{j}}" type="text" [(ngModel)]="guest.name" [disabled]="j === 0" name="guestName{{j}}" required style="width:100%; height:40px; border-radius:.2rem; border:none; font-size:125%; font-weight:bold">
+                    </div>
+                    
+                    <!-- Guest Age Field -->
+                    <div style="width:28%; display:block">
+                      <label for="guestAge{{j}}" style="width:100%; font-size:125%; font-weight:bold">Guest Age:</label>
+                      <input id="guestAge{{j}}" type="number" [(ngModel)]="guest.age" name="guestAge{{j}}" required style="width:100%; height:40px; border-radius:.2rem; border:none; font-size:125%; font-weight:bold">
+                    </div>
+                    
+                    <!-- Guest Contact Number Field -->
+                    <div style="width:28%; display:block">
+                      <label for="guestContact{{j}}" style="width:100%; font-size:125%; font-weight:bold">Contact Number:</label>
+                      <input id="guestContact{{j}}" type="text" [(ngModel)]="guest.contact" [disabled]="j === 0" name="guestContact{{j}}" required style="width:100%; height:40px; border-radius:.2rem; border:none; font-size:125%; font-weight:bold">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              
+              <!-- @if(person_count===2){
+                Guest 2 Details
+              <h5 style="width:100%;">Enter Details Of Guest 2</h5>
+              <div style="width:100%;display:flex;justify-content:space-between;margin-bottom:1%">
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="width:28%;display:block">
+                    <label for="guestName2" style="width:100%;font-size:125%;font-weight:bold">Guest Name:</label>
+                    <input id="guestName2" type="text" [(ngModel)]="booking.guests[1].name" name="guestName2" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                    <label for="guestAge2" style="width:100%;font-size:125%;font-weight:bold">Guest Age:</label>
+                    <input id="guestAge2" type="number" [(ngModel)]="booking.guests[1].age" name="guestAge2" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                      <label for="guestnumber2" style="width:100%;font-size:125%;font-weight:bold">Contact Number:</label>
+                      <input id="guestnumber2" type="text" [(ngModel)]="booking.guests[1].contact" name="guestnumber2" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                    </div>
+                </div>
+              </div>
+              }
+
+              @if(person_count===3){
+                Guest 2 Details
+              <h5 style="width:100%;">Enter Details Of Guest 2</h5>
+              <div style="width:100%;display:flex;justify-content:space-between;margin-bottom:1%">
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="width:28%;display:block">
+                    <label for="guestName2" style="width:100%;font-size:125%;font-weight:bold">Guest Name:</label>
+                    <input id="guestName2" type="text" [(ngModel)]="booking.guests[1].name" name="guestName2" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                    <label for="guestAge2" style="width:100%;font-size:125%;font-weight:bold">Guest Age:</label>
+                    <input id="guestAge2" type="number" [(ngModel)]="booking.guests[1].age" name="guestAge2" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                      <label for="guestnumber2" style="width:100%;font-size:125%;font-weight:bold">Contact Number:</label>
+                      <input id="guestnumber2" type="text" [(ngModel)]="booking.guests[1].contact" name="guestnumber2" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                    </div>
+                </div>
+              </div>
+
+              Guest 3 Details
+              <h5 style="width:100%;">Enter Details Of Guest 3</h5>
+              <div style="width:100%;display:flex;justify-content:space-between;margin-bottom:1%">
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="width:28%;display:block">
+                    <label for="guestName3" style="width:100%;font-size:125%;font-weight:bold">Guest Name:</label>
+                    <input id="guestName3" type="text" [(ngModel)]="booking.guests[2].name" name="guestName3" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                    <label for="guestAge3" style="width:100%;font-size:125%;font-weight:bold">Guest Age:</label>
+                    <input id="guestAge3" type="number" [(ngModel)]="booking.guests[2].age" name="guestAge3" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                      <label for="guestnumber3" style="width:100%;font-size:125%;font-weight:bold">Contact Number:</label>
+                      <input id="guestnumber3" type="text" [(ngModel)]="booking.guests[2].contact" name="guestnumber3" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                    </div>
+                </div>
+              </div>
+              }
+            
+              @if(person_count===4){
+                Guest 2 Details
+              <h5 style="width:100%;">Enter Details Of Guest 2</h5>
+              <div style="width:100%;display:flex;justify-content:space-between;margin-bottom:1%">
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="width:28%;display:block">
+                    <label for="guestName2" style="width:100%;font-size:125%;font-weight:bold">Guest Name:</label>
+                    <input id="guestName2" type="text" [(ngModel)]="booking.guests[1].name" name="guestName2" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                    <label for="guestAge2" style="width:100%;font-size:125%;font-weight:bold">Guest Age:</label>
+                    <input id="guestAge2" type="number" [(ngModel)]="booking.guests[1].age" name="guestAge2" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                      <label for="guestnumber2" style="width:100%;font-size:125%;font-weight:bold">Contact Number:</label>
+                      <input id="guestnumber2" type="text" [(ngModel)]="booking.guests[1].contact" name="guestnumber2" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                    </div>
+                </div>
+              </div>
+
+              Guest 3 Details
+              <h5 style="width:100%;">Enter Details Of Guest 3</h5>
+              <div style="width:100%;display:flex;justify-content:space-between;margin-bottom:1%">
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="width:28%;display:block">
+                    <label for="guestName3" style="width:100%;font-size:125%;font-weight:bold">Guest Name:</label>
+                    <input id="guestName3" type="text" [(ngModel)]="booking.guests[2].name" name="guestName3" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                    <label for="guestAge3" style="width:100%;font-size:125%;font-weight:bold">Guest Age:</label>
+                    <input id="guestAge3" type="number" [(ngModel)]="booking.guests[2].age" name="guestAge3" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                      <label for="guestnumber3" style="width:100%;font-size:125%;font-weight:bold">Contact Number:</label>
+                      <input id="guestnumber3" type="text" [(ngModel)]="booking.guests[2].contact" name="guestnumber3" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                    </div>
+                </div>
+              </div>
+
+              Guest 4 Details
+              <h5 style="width:100%;">Enter Details Of Guest 4</h5>
+              <div style="width:100%;display:flex;justify-content:space-between;;margin-bottom:1%">
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="width:28%;display:block">
+                    <label for="guestName4" style="width:100%;font-size:125%;font-weight:bold">Guest Name:</label>
+                    <input id="guestName4" type="text" [(ngModel)]="booking.guests[3].name" name="guestName4" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                    <label for="guestAge4" style="width:100%;font-size:125%;font-weight:bold">Guest Age:</label>
+                    <input id="guestAge4" type="number" [(ngModel)]="booking.guests[3].age" name="guestAge4" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                      <label for="guestnumber4" style="width:100%;font-size:125%;font-weight:bold">Contact Number:</label>
+                      <input id="guestnumber4" type="text" [(ngModel)]="booking.guests[3].contact" name="guestnumber4" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                    </div>
+                </div>
+              </div>
+              }
+
+              @if(person_count===5){
+                Guest 2 Details
+              <h5 style="width:100%;">Enter Details Of Guest 2</h5>
+              <div style="width:100%;display:flex;justify-content:space-between;margin-bottom:1%">
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="width:28%;display:block">
+                    <label for="guestName2" style="width:100%;font-size:125%;font-weight:bold">Guest Name:</label>
+                    <input id="guestName2" type="text" [(ngModel)]="booking.guests[1].name" name="guestName2" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                    <label for="guestAge2" style="width:100%;font-size:125%;font-weight:bold">Guest Age:</label>
+                    <input id="guestAge2" type="number" [(ngModel)]="booking.guests[1].age" name="guestAge2" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                      <label for="guestnumber2" style="width:100%;font-size:125%;font-weight:bold">Contact Number:</label>
+                      <input id="guestnumber2" type="text" [(ngModel)]="booking.guests[1].contact" name="guestnumber2" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                    </div>
+                </div>
+              </div>
+
+              Guest 3 Details
+              <h5 style="width:100%;">Enter Details Of Guest 3</h5>
+              <div style="width:100%;display:flex;justify-content:space-between;margin-bottom:1%">
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="width:28%;display:block">
+                    <label for="guestName3" style="width:100%;font-size:125%;font-weight:bold">Guest Name:</label>
+                    <input id="guestName3" type="text" [(ngModel)]="booking.guests[2].name" name="guestName3" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                    <label for="guestAge3" style="width:100%;font-size:125%;font-weight:bold">Guest Age:</label>
+                    <input id="guestAge3" type="number" [(ngModel)]="booking.guests[2].age" name="guestAge3" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                      <label for="guestnumber3" style="width:100%;font-size:125%;font-weight:bold">Contact Number:</label>
+                      <input id="guestnumber3" type="text" [(ngModel)]="booking.guests[2].contact" name="guestnumber3" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                    </div>
+                </div>
+              </div>
+
+              Guest 4 Details
+              <h5 style="width:100%;">Enter Details Of Guest 4</h5>
+              <div style="width:100%;display:flex;justify-content:space-between;;margin-bottom:1%">
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="width:28%;display:block">
+                    <label for="guestName4" style="width:100%;font-size:125%;font-weight:bold">Guest Name:</label>
+                    <input id="guestName4" type="text" [(ngModel)]="booking.guests[3].name" name="guestName4" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                    <label for="guestAge4" style="width:100%;font-size:125%;font-weight:bold">Guest Age:</label>
+                    <input id="guestAge4" type="number" [(ngModel)]="booking.guests[3].age" name="guestAge4" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                      <label for="guestnumber4" style="width:100%;font-size:125%;font-weight:bold">Contact Number:</label>
+                      <input id="guestnumber4" type="text" [(ngModel)]="booking.guests[3].contact" name="guestnumber4" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                    </div>
+                </div>
+              </div>
+
+              Guest 5 Details
+              <h5 style="width:100%;">Enter Details Of Guest 5</h5>
+              <div style="width:100%;display:flex;justify-content:space-between">
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="width:28%;display:block">
+                    <label for="guestName5" style="width:100%;font-size:125%;font-weight:bold">Guest Name:</label>
+                    <input id="guestName5" type="text" [(ngModel)]="booking.guests[4].name" name="guestName5" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                    <label for="guestAge5" style="width:100%;font-size:125%;font-weight:bold">Guest Age:</label>
+                    <input id="guestAge5" type="number" [(ngModel)]="booking.guests[4].age" name="guestAge5" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                      <label for="guestnumber5" style="width:100%;font-size:125%;font-weight:bold">Contact Number:</label>
+                      <input id="guestnumber5" type="text" [(ngModel)]="booking.guests[4].contact" name="guestnumber5" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                    </div>
+                </div>
+              </div>
+              }
+
+              @if(person_count===6){
+                 Guest 2 Details
+              <h5 style="width:100%;">Enter Details Of Guest 2</h5>
+              <div style="width:100%;display:flex;justify-content:space-between;margin-bottom:1%">
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="width:28%;display:block">
+                    <label for="guestName2" style="width:100%;font-size:125%;font-weight:bold">Guest Name:</label>
+                    <input id="guestName2" type="text" [(ngModel)]="booking.guests[1].name" name="guestName2" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                    <label for="guestAge2" style="width:100%;font-size:125%;font-weight:bold">Guest Age:</label>
+                    <input id="guestAge2" type="number" [(ngModel)]="booking.guests[1].age" name="guestAge2" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                      <label for="guestnumber2" style="width:100%;font-size:125%;font-weight:bold">Contact Number:</label>
+                      <input id="guestnumber2" type="text" [(ngModel)]="booking.guests[1].contact" name="guestnumber2" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                    </div>
+                </div>
+              </div>
+
+              Guest 3 Details
+              <h5 style="width:100%;">Enter Details Of Guest 3</h5>
+              <div style="width:100%;display:flex;justify-content:space-between;margin-bottom:1%">
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="width:28%;display:block">
+                    <label for="guestName3" style="width:100%;font-size:125%;font-weight:bold">Guest Name:</label>
+                    <input id="guestName3" type="text" [(ngModel)]="booking.guests[2].name" name="guestName3" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                    <label for="guestAge3" style="width:100%;font-size:125%;font-weight:bold">Guest Age:</label>
+                    <input id="guestAge3" type="number" [(ngModel)]="booking.guests[2].age" name="guestAge3" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                      <label for="guestnumber3" style="width:100%;font-size:125%;font-weight:bold">Contact Number:</label>
+                      <input id="guestnumber3" type="text" [(ngModel)]="booking.guests[2].contact" name="guestnumber3" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                    </div>
+                </div>
+              </div>
+
+              Guest 4 Details
+              <h5 style="width:100%;">Enter Details Of Guest 4</h5>
+              <div style="width:100%;display:flex;justify-content:space-between;;margin-bottom:1%">
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="width:28%;display:block">
+                    <label for="guestName4" style="width:100%;font-size:125%;font-weight:bold">Guest Name:</label>
+                    <input id="guestName4" type="text" [(ngModel)]="booking.guests[3].name" name="guestName4" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                    <label for="guestAge4" style="width:100%;font-size:125%;font-weight:bold">Guest Age:</label>
+                    <input id="guestAge4" type="number" [(ngModel)]="booking.guests[3].age" name="guestAge4" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                      <label for="guestnumber4" style="width:100%;font-size:125%;font-weight:bold">Contact Number:</label>
+                      <input id="guestnumber4" type="text" [(ngModel)]="booking.guests[3].contact" name="guestnumber4" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                    </div>
+                </div>
+              </div>
+
+              Guest 5 Details
+              <h5 style="width:100%;">Enter Details Of Guest 5</h5>
+              <div style="width:100%;display:flex;justify-content:space-between">
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="width:28%;display:block">
+                    <label for="guestName5" style="width:100%;font-size:125%;font-weight:bold">Guest Name:</label>
+                    <input id="guestName5" type="text" [(ngModel)]="booking.guests[4].name" name="guestName5" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                    <label for="guestAge5" style="width:100%;font-size:125%;font-weight:bold">Guest Age:</label>
+                    <input id="guestAge5" type="number" [(ngModel)]="booking.guests[4].age" name="guestAge5" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                      <label for="guestnumber5" style="width:100%;font-size:125%;font-weight:bold">Contact Number:</label>
+                      <input id="guestnumber5" type="text" [(ngModel)]="booking.guests[4].contact" name="guestnumber5" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                    </div>
+                </div>
+              </div>
+
+              Guest 6 Details
+              <h5 style="width:100%;">Enter Details Of Guest 6</h5>
+              <div style="width:100%;display:flex;justify-content:space-between">
+                <div style="display: flex; justify-content: space-between;">
+                  <div style="width:28%;display:block">
+                    <label for="guestName6" style="width:100%;font-size:125%;font-weight:bold">Guest Name:</label>
+                    <input id="guestName6" type="text" [(ngModel)]="booking.guests[5].name" name="guestName6" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                    <label for="guestAge6" style="width:100%;font-size:125%;font-weight:bold">Guest Age:</label>
+                    <input id="guestAge6" type="number" [(ngModel)]="booking.guests[5].age" name="guestAge6" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                  </div>
+                  <div style="width:28%;display:block">
+                      <label for="guestnumber6" style="width:100%;font-size:125%;font-weight:bold">Contact Number:</label>
+                      <input id="guestnumber6" type="text" [(ngModel)]="booking.guests[5].contact" name="guestnumber6" required style="width:100%;height:40px;border-radius:.2rem;border:none;font-size:125%;font-weight:bold">
+                    </div>
+                </div>
+              </div>
+              }
+             -->
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="reset()">Close</button>
+            <button type="button" class="btn btn-primary" (click)="confirmClick()" data-bs-dismiss="modal" [routerLink]="['/allHotels/allRooms/confirmBooking']">Proceed</button>
+        </div>
+      </div>
+    </div>
+    }  
+          @else{
+            <div class="modal-dialog">
+              <div class="modal-content" style="border: 2px solid wheat; background-color:  rgba(21, 0, 3, 0.9);box-shadow: 0 0 1rem darkcyan;color:wheat">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Booking Form</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close"></button>
+                </div>
+                <div class="modal-body">
+                   <h3>Please Log In !</h3>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-bs-dismiss="modal" [routerLink]="['/userSignin']">LOGIN</button>
+                </div>
+              </div>
+            </div>
+          }
+  </div>

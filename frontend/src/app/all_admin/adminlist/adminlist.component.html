@@ -1,0 +1,83 @@
+<div id="about">
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/authentication/adminSignin/adminHome']">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page" style="color: black;">Admins</li>
+      </ol>
+    </nav>
+      <div class="row g-0" id="about_cont">
+          <div class="card-body"> 
+            <div class="col-md-4" id="hotels_div">
+               <div class="show_hotels">
+                <div class="all_hotels">
+                  <nav class="nav" style="position: sticky">
+                    <ul class="list-group list-group-horizontal d-flex justify-content-center sub_nav" style=" width:100%">
+                      <li class="list-group-item flexible-item" style="border-top-left-radius: .5rem">Sl No.</li>
+                      <li class="list-group-item flexible-item">Admin Id</li>
+                      <li class="list-group-item flexible-item">Name</li>
+                      <li class="list-group-item flexible-item">Email Id</li>
+                      <li class="list-group-item flexible-item">Contact No</li>
+                      <li class="list-group-item flexible-item">Creation Date</li>
+                      <li class="list-group-item flexible-item" style="border-top-right-radius:.5rem;border-right: 1px solid rgb(222 226 230);">Delete Admin</li>
+                    </ul>
+                  </nav>
+                  <div class="sub_div">
+                    <ul class="list-group list-group-horizontal" *ngFor="let admin of admins; let i = index">
+                      <li class="list-group-item flexible-item">{{ i + 1 }}</li>
+                      <li class="list-group-item flexible-item" style=" cursor:text; user-select:text">{{ admin._id }}</li>
+                      <li class="list-group-item flexible-item">{{ admin.name }}</li>
+                      <li class="list-group-item flexible-item">{{ admin.email}}</li>
+                      <li class="list-group-item flexible-item">{{ admin.contact_no}}</li>
+                      <li class="list-group-item flexible-item">{{ admin.dateofcreation}}</li>
+                      <li class="list-group-item  flexible-item d-flex justify-content-center" style="padding:0"><button class="delete_btn" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1" (click)="removeClick(admin._id)">Remove</button></li>
+                    </ul>
+                  </div>
+
+<!--Modal-1-->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog"style="border:2px solid wheat; border-radius:.7rem">
+      <div class="modal-content"  style="background-color: rgba(31, 30, 30, 0.9); color:white">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Remove Admin</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color:white" (click)=reset()></button>
+        </div>
+        <div class="modal-body">
+          <span style="color:rgb(255, 66, 66)">Are You Sure To Remove This Admin <span style="color: yellow;">[Admin Id - {{deleteid}}]</span> from existing admin list ?</span>
+          <!-- <span style="color:green">Hotel of Id no: deleted successfully!</span> -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)=reset()>Close</button>
+          <button type="button" class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2" id="delete_btn" (click)="deleteAdmin()">Delete Room</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+  <!--Modal-2-->
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog"style="border:2px solid wheat; border-radius:.7rem">
+      <div class="modal-content"  style="background-color: rgba(31, 30, 30, 0.9); color:white">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Deletation Successful</h1>
+          @if(mainAdmin){
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color:white" [routerLink]="['/authentication']"></button>
+          }
+          @else{
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background-color:white" (click)=reset()></button>
+          }
+        </div>
+        <div class="modal-body">
+          <!-- <span style="color:red">Are You Sure To Delete This Room <span style="color: yellow;">[Room Id - {{room_id}}]</span> Existing Hotel <span style="color: blue;">[Hotel Id - {{hotel_id}}]</span> ?</span> -->
+          <span style="color:rgb(65, 211, 65)">Admin of Id no: <span style="color: yellow;">[{{deleteid}}]</span> deleted successfully!</span>
+        </div>
+        <div class="modal-footer">
+          @if(mainAdmin){
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" [routerLink]="['/authentication']">Close</button>
+          }
+          @else{
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)=reset()>Close</button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>                  

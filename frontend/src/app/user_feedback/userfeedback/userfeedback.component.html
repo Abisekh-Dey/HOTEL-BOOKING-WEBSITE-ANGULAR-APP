@@ -1,0 +1,40 @@
+<div id="about">
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="['/authentication/adminSignin/adminHome']">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page" style="color: black;">Feedbacks</li>
+      </ol>
+    </nav>
+    <div class="row g-0" id="about_cont">
+        <div class="card-body"> 
+            <div class="col-md-4" id="hotels_div">
+               <div class="show_hotels">
+                    <div class="all_hotels">
+                        <nav class="nav" style="position: sticky">
+                            <ul class="list-group list-group-horizontal d-flex justify-content-center sub_nav" style=" width:100%">
+                                <li class="list-group-item flexible-item" style="border-top-left-radius: .5rem">Sl No.</li>
+                                <li class="list-group-item flexible-item">Feedback Id</li>
+                                <li class="list-group-item flexible-item">Name</li>
+                                <li class="list-group-item flexible-item">Email Id</li>
+                                <li class="list-group-item flexible-item">Subject</li>
+                                <li class="list-group-item flexible-item">Message</li>
+                                <li class="list-group-item flexible-item" style="border-top-right-radius:.5rem;border-right: 1px solid rgb(222 226 230);">Sending Date</li>
+                            </ul>
+                        </nav>
+                        <div class="sub_div">
+                            <ul class="list-group list-group-horizontal" *ngFor="let feed of feedbacks; let i = index">
+                                <li class="list-group-item flexible-item">{{ i + 1 }}</li>
+                                <li class="list-group-item flexible-item" style="cursor:text; user-select:text">{{ feed._id }}</li>
+                                <li class="list-group-item flexible-item">{{ feed.name }}</li>
+                                <li class="list-group-item flexible-item" style="cursor:text; user-select:text">{{ feed.email}}</li>
+                                <li class="list-group-item flexible-item">{{ feed.subject}}</li>
+                                <li class="list-group-item flexible-item">{{ feed.message}}</li>
+                                <li class="list-group-item flexible-item">{{ feed.dateofmessage}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    
