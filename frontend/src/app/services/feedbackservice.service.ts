@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Feedback } from '../common/feedback'
+import { Feedback } from '../common/feedback';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeedbackserviceService {
-  private baseUrl = 'https://hotel-booking-website-angular-app-backend.onrender.com/feedback';
-  private baseUrl2 = 'https://hotel-booking-website-angular-app-backend.onrender.com/allfeedbacks';
+  private baseUrl = `${environment.apiUrl}/feedback`;
+  private baseUrl2 = `${environment.apiUrl}/allfeedbacks`;
 
   constructor(private httpClient: HttpClient) { }
 
