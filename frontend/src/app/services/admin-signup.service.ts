@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Hotel } from '../common/hotel';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminSignupService {
-  private baseUrl = 'https://hotel-booking-website-angular-app-backend.onrender.com/admin/signup';
+  private baseUrl = `${environment.apiUrl}/admin/signup`;
   //private baseUrl2 = 'http://localhost:5000/hotel/';
   constructor(private httpClient: HttpClient) { }
 
