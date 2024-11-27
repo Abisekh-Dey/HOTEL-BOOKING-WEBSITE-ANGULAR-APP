@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Hotel } from '../common/hotel';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,9 @@ import { map } from 'rxjs/operators';
 export class HotelService {
 
 
-  private baseUrl = 'https://hotel-booking-website-angular-app-backend.onrender.com/hotel';
-  private searchUrl = 'https://hotel-booking-website-angular-app-backend.onrender.com/hotels/search';
-  private wishUrl = 'https://hotel-booking-website-angular-app-backend.onrender.com/wishlist';
+  private baseUrl = `${environment.apiUrl}/hotel`;
+  private searchUrl = `${environment.apiUrl}/hotels/search`;
+  private wishUrl = `${environment.apiUrl}/wishlist`;
   constructor(private httpClient: HttpClient) { }
 
 getHotelList(): Observable<Hotel[]> {
