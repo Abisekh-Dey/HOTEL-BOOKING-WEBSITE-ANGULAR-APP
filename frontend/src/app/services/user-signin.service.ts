@@ -3,14 +3,15 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Hotel } from '../common/hotel';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment'; 
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserSigninService {
-  private baseUrl = 'https://hotel-booking-website-angular-app-backend.onrender.com/login';
-  private baseUrl2 = 'https://hotel-booking-website-angular-app-backend.onrender.com/backuplogin';
+  private baseUrl = `${environment.apiUrl}/login`;
+  private baseUrl2 = `${environment.apiUrl}/backuplogin`;
 
   constructor(private httpClient: HttpClient) { }
 
