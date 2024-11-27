@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PasswordAuthenticationService {
-  private baseUrl1 = 'https://hotel-booking-website-angular-app-backend.onrender.com/authentication';
-  private baseUrl2 = 'https://hotel-booking-website-angular-app-backend.onrender.com/updateauthenticationpassword';
+  private baseUrl1 = `${environment.apiUrl}/authentication`;
+  private baseUrl2 = `${environment.apiUrl}/updateauthenticationpassword`;
 
   constructor(private httpClient: HttpClient) { }
 
