@@ -7,8 +7,8 @@ import { Feedback } from '../common/feedback'
   providedIn: 'root'
 })
 export class FeedbackserviceService {
-  private baseUrl = 'http://localhost:5000/feedback';
-  private baseUrl2 = 'http://localhost:5000/allfeedbacks';
+  private baseUrl = 'https://hotel-booking-website-angular-app-backend.onrender.com/feedback';
+  private baseUrl2 = 'https://hotel-booking-website-angular-app-backend.onrender.com/allfeedbacks';
 
   constructor(private httpClient: HttpClient) { }
 
