@@ -12,6 +12,7 @@ const adminRouter = require("./routes/admin_route.js");
 const passwordRouter = require("./routes/password_route.js");
 const wishlistRouter = require("./routes/wishlist_route.js");
 const feedbackRouter = require("./routes/feedback_route.js");
+require('dotenv').config();
 
 app.use(cors())
 app.use(bodyParser.json());
@@ -34,7 +35,7 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || 'An unknown error occurred!' });
 });
 
-mongoose.connect("mongodb://localhost:27017")
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Connected to database");
   })
@@ -42,6 +43,8 @@ mongoose.connect("mongodb://localhost:27017")
     console.log("Connection Failed!");
   });
 
-app.listen(5000, () => {
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
   console.log("Server is running on port 5000");
 });
