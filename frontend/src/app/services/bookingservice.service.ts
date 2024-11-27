@@ -2,14 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Booking } from '../common/booking';
-
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BookingserviceService {
-  private baseUrl = 'https://hotel-booking-website-angular-app-backend.onrender.com/booking';
-  private baseUrl2 = 'https://hotel-booking-website-angular-app-backend.onrender.com/bookings';
+  private baseUrl =  `${environment.apiUrl}/booking`;
+  private baseUrl2 = `${environment.apiUrl}/bookings`;
   constructor(private httpClient: HttpClient) { }
 
 create(data: any): Observable<any> {
