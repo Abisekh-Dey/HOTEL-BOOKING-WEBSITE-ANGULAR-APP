@@ -10,8 +10,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserSignupService {
-  private baseUrl = 'http://localhost:5000/signup';
-  private baseUrl2 = 'http://localhost:5000/users';
+  private baseUrl = 'https://hotel-booking-website-angular-app-backend.onrender.com/signup';
+  private baseUrl2 = 'https://hotel-booking-website-angular-app-backend.onrender.com/users';
   constructor(private httpClient: HttpClient) { }
 
 create(data: any): Observable<any> {
