@@ -11,8 +11,8 @@ import { map } from 'rxjs/operators';
 export class RoomService {
 
 
-  private baseUrl1 = 'http://localhost:5000/room';
-  private baseUrl2 = 'http://localhost:5000/hotel/room';
+  private baseUrl1 = 'https://hotel-booking-website-angular-app-backend.onrender.com/room';
+  private baseUrl2 = 'https://hotel-booking-website-angular-app-backend.onrender.com/hotel/room';
   constructor(private httpClient: HttpClient) { }
 
   // getRoomList(): Observable<Room[]> {
