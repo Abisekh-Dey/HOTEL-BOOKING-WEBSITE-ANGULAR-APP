@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AdminSignupService {
-  private baseUrl = 'http://localhost:5000/admin/signup';
+  private baseUrl = 'https://hotel-booking-website-angular-app-backend.onrender.com/admin/signup';
   //private baseUrl2 = 'http://localhost:5000/hotel/';
   constructor(private httpClient: HttpClient) { }
 
