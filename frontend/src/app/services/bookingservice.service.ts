@@ -8,8 +8,8 @@ import { Booking } from '../common/booking';
   providedIn: 'root'
 })
 export class BookingserviceService {
-  private baseUrl = 'http://localhost:5000/booking';
-  private baseUrl2 = 'http://localhost:5000/bookings';
+  private baseUrl = 'https://hotel-booking-website-angular-app-backend.onrender.com/booking';
+  private baseUrl2 = 'https://hotel-booking-website-angular-app-backend.onrender.com/bookings';
   constructor(private httpClient: HttpClient) { }
 
 create(data: any): Observable<any> {
