@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class PasswordAuthenticationService {
-  private baseUrl1 = 'http://localhost:5000/authentication';
-  private baseUrl2 = 'http://localhost:5000/updateauthenticationpassword';
+  private baseUrl1 = 'https://hotel-booking-website-angular-app-backend.onrender.com/authentication';
+  private baseUrl2 = 'https://hotel-booking-website-angular-app-backend.onrender.com/updateauthenticationpassword';
 
   constructor(private httpClient: HttpClient) { }
 
