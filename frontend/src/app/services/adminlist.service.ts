@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AdminSignup } from '../common/admin_signup';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminlistService {
-  private baseUrl = 'https://hotel-booking-website-angular-app-backend.onrender.com/admin';
+  private baseUrl = `${environment.apiUrl}/admin`;
   
   constructor(private httpClient: HttpClient) { }
 
