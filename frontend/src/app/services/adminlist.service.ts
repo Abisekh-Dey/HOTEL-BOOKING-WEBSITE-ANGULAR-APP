@@ -8,7 +8,7 @@ import { AdminSignup } from '../common/admin_signup';
   providedIn: 'root'
 })
 export class AdminlistService {
-  private baseUrl = 'http://localhost:5000/admin';
+  private baseUrl = 'https://hotel-booking-website-angular-app-backend.onrender.com/admin';
   
   constructor(private httpClient: HttpClient) { }
 
