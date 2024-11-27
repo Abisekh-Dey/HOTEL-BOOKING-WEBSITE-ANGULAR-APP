@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Room } from '../common/room';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ import { map } from 'rxjs/operators';
 export class RoomService {
 
 
-  private baseUrl1 = 'https://hotel-booking-website-angular-app-backend.onrender.com/room';
-  private baseUrl2 = 'https://hotel-booking-website-angular-app-backend.onrender.com/hotel/room';
+  private baseUrl1 = `${environment.apiUrl}/room`;
+  private baseUrl2 = `${environment.apiUrl}/hotel/room`;
   constructor(private httpClient: HttpClient) { }
 
   // getRoomList(): Observable<Room[]> {
