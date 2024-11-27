@@ -9,8 +9,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AdminSigninService {
-  private baseUrl1 = 'http://localhost:5000/admin/login';
-  private baseUrl2 = 'http://localhost:5000/admin/backuplogin';
+  private baseUrl1 = 'https://hotel-booking-website-angular-app-backend.onrender.com/admin/login';
+  private baseUrl2 = 'https://hotel-booking-website-angular-app-backend.onrender.com/admin/backuplogin';
 
   constructor(private httpClient: HttpClient) { }
 
